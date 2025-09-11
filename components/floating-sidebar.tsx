@@ -24,7 +24,6 @@ export default function FloatingSidebar() {
       const scrollPosition = window.scrollY
       setScrolled(scrollPosition > 100)
 
-      // Update active section based on scroll position
       const sections = navItems.map((item) => item.href.substring(1))
       const currentSection = sections.find((section) => {
         const element = document.getElementById(section)
@@ -74,7 +73,7 @@ export default function FloatingSidebar() {
               <div className="container mx-auto px-6 py-4">
                 <div className="flex justify-between items-center">
                   <Link href="#home" className="text-2xl font-heading font-bold">
-                    <span className="text-gradient">Ibrahim</span>
+                    <span className="text-gradient">Gaius</span>
                   </Link>
 
                   <div className="flex items-center space-x-8">
@@ -95,27 +94,12 @@ export default function FloatingSidebar() {
               </div>
             </motion.nav>
           ) : (
-            // Side Navigation Bar - Fixed positioning for true center
+            // Side Navigation Bar
             <motion.nav
               key="sidenav"
-              initial={{
-                x: -200,
-                y: -50,
-                scale: 0.8,
-                opacity: 0,
-              }}
-              animate={{
-                x: 0,
-                y: 0,
-                scale: 1,
-                opacity: 1,
-              }}
-              exit={{
-                x: -200,
-                y: -50,
-                scale: 0.8,
-                opacity: 0,
-              }}
+              initial={{ x: -200, y: -50, scale: 0.8, opacity: 0 }}
+              animate={{ x: 0, y: 0, scale: 1, opacity: 1 }}
+              exit={{ x: -200, y: -50, scale: 0.8, opacity: 0 }}
               transition={{
                 duration: 0.8,
                 ease: [0.4, 0, 0.2, 1],
@@ -139,7 +123,7 @@ export default function FloatingSidebar() {
                   className="text-center mb-2"
                 >
                   <Link href="#home" className="text-lg font-heading font-bold">
-                    <span className="text-gradient">IM</span>
+                    <span className="text-gradient">GC</span>
                   </Link>
                 </motion.div>
 
