@@ -12,22 +12,12 @@ export default function AboutSection() {
 
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.1,
-      },
-    },
+    visible: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0.1 } },
   }
 
   const itemVariants = {
     hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: { duration: 0.6, ease: "easeOut" },
-    },
+    visible: { y: 0, opacity: 1, transition: { duration: 0.6, ease: "easeOut" } },
   }
 
   const listItemVariants = {
@@ -35,11 +25,7 @@ export default function AboutSection() {
     visible: (i: number) => ({
       y: 0,
       opacity: 1,
-      transition: {
-        duration: 0.5,
-        delay: i * 0.1,
-        ease: "easeOut",
-      },
+      transition: { duration: 0.5, delay: i * 0.1, ease: "easeOut" },
     }),
   }
 
@@ -51,6 +37,7 @@ export default function AboutSection() {
 
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto" ref={ref}>
+          {/* 標題 */}
           <motion.div
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
@@ -67,6 +54,7 @@ export default function AboutSection() {
           </motion.div>
 
           <div className="split-layout">
+            {/* 左側卡片 */}
             <motion.div
               className="glass card-hover p-6 md:p-8 h-full"
               initial={{ opacity: 0, x: -50 }}
@@ -76,8 +64,8 @@ export default function AboutSection() {
               <div className="flex flex-col md:flex-row items-center md:items-start gap-6 mb-6">
                 <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-primary/30 flex-shrink-0">
                   <Image
-                    src="/images/ibrahim-avatar.png"
-                    alt="Ibrahim Mustafa"
+                    src="/images/gaius-avatar.png"
+                    alt="Gaius Chen"
                     width={96}
                     height={96}
                     className="w-full h-full object-cover"
@@ -98,8 +86,8 @@ export default function AboutSection() {
                     animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                     transition={{ duration: 0.5, delay: 0.5 }}
                   >
-                    I'm Ibrahim Mustafa, an AI Automation Expert with a passion for creating innovative solutions that
-                    bridge the gap between human creativity and machine intelligence.
+                    I'm <span className="text-gradient">Gaius Chen</span>, a Performance Marketing Expert with 4+ years of
+                    experience managing paid media campaigns across finance, e-commerce, and mobile apps.
                   </motion.p>
                 </div>
               </div>
@@ -110,10 +98,12 @@ export default function AboutSection() {
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ duration: 0.5, delay: 0.6 }}
               >
-                With expertise in AI, machine learning, and automation, I help businesses streamline their processes,
-                enhance productivity, and unlock new possibilities through cutting-edge technology.
+                Specialized in optimizing CPL, CPF, and CPI with a proven track record of reducing acquisition costs and
+                scaling campaigns effectively. Skilled in Google Ads, Meta Ads, Apple Search Ads, TikTok Ads, and advanced
+                analytics with GA4, AppsFlyer, and Looker Studio.
               </motion.p>
 
+              {/* 技能標籤 */}
               <motion.div
                 className="mt-6 pt-6 border-t border-white/10"
                 initial={{ opacity: 0 }}
@@ -121,15 +111,28 @@ export default function AboutSection() {
                 transition={{ duration: 0.5, delay: 0.7 }}
               >
                 <div className="flex flex-wrap gap-3">
-                  {["AI", "Machine Learning", "Automation", "Data Science"].map((skill, index) => (
+                  {[
+                    "Google Ads",
+                    "Meta Ads",
+                    "Apple Search Ads",
+                    "TikTok Ads",
+                    "GA4 & Looker Studio",
+                    "AppsFlyer",
+                    "Midjourney",
+                    "Heygen",
+                    "GPT",
+                    "Gemini",
+                    "v0",
+                    "Loveable",
+                  ].map((skill, index) => (
                     <motion.span
                       key={skill}
                       className={`px-3 py-1 text-xs rounded-full glass border ${
                         index % 3 === 0
                           ? "border-primary/20 bg-primary/10"
                           : index % 3 === 1
-                            ? "border-secondary/20 bg-secondary/10"
-                            : "border-accent/20 bg-accent/10"
+                          ? "border-secondary/20 bg-secondary/10"
+                          : "border-accent/20 bg-accent/10"
                       }`}
                       initial={{ opacity: 0, scale: 0.8 }}
                       animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
@@ -140,8 +143,21 @@ export default function AboutSection() {
                   ))}
                 </div>
               </motion.div>
+
+              {/* 引言 */}
+              <motion.div
+                className="mt-6 gradient-border p-4"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.5, delay: 1.0 }}
+              >
+                <p className="text-center text-sm italic">
+                  "Where human creativity meets AI, performance marketing reaches its full potential."
+                </p>
+              </motion.div>
             </motion.div>
 
+            {/* 右側卡片 */}
             <motion.div
               className="neomorphic p-6 md:p-8 h-full"
               initial={{ opacity: 0, x: 50 }}
@@ -154,67 +170,39 @@ export default function AboutSection() {
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ duration: 0.5, delay: 0.6 }}
               >
-                What is AI Automation
+                What I Do
               </motion.h3>
               <ul className="space-y-4">
-                <motion.li
-                  className="flex items-start"
-                  custom={0}
-                  initial="hidden"
-                  animate={isInView ? "visible" : "hidden"}
-                  variants={listItemVariants}
-                >
+                <motion.li className="flex items-start" custom={0} initial="hidden" animate={isInView ? "visible" : "hidden"} variants={listItemVariants}>
                   <span className="inline-block mr-3 mt-1">
                     <TrendingUp className="w-4 h-4 text-primary" />
                   </span>
                   <span>
-                    <strong className="text-primary">Competitive Advantage:</strong> Companies leveraging AI automation
-                    are outperforming competitors by 3-5x in operational efficiency
+                    <strong className="text-primary">Campaign Strategy:</strong> Building paid media strategies tailored to client goals
                   </span>
                 </motion.li>
-                <motion.li
-                  className="flex items-start"
-                  custom={1}
-                  initial="hidden"
-                  animate={isInView ? "visible" : "hidden"}
-                  variants={listItemVariants}
-                >
+                <motion.li className="flex items-start" custom={1} initial="hidden" animate={isInView ? "visible" : "hidden"} variants={listItemVariants}>
                   <span className="inline-block mr-3 mt-1">
                     <Building className="w-4 h-4 text-secondary" />
                   </span>
                   <span>
-                    <strong className="text-secondary">Growing Divide:</strong> A widening gap is forming between
-                    AI-powered organizations and those falling behind in adoption
+                    <strong className="text-secondary">Optimization:</strong> Reducing CPL by up to 30% and improving ROAS across channels
                   </span>
                 </motion.li>
-                <motion.li
-                  className="flex items-start"
-                  custom={2}
-                  initial="hidden"
-                  animate={isInView ? "visible" : "hidden"}
-                  variants={listItemVariants}
-                >
+                <motion.li className="flex items-start" custom={2} initial="hidden" animate={isInView ? "visible" : "hidden"} variants={listItemVariants}>
                   <span className="inline-block mr-3 mt-1">
                     <Coins className="w-4 h-4 text-accent" />
                   </span>
                   <span>
-                    <strong className="text-accent">ROI Potential:</strong> Businesses implementing AI automation see
-                    average cost reductions of 40% and productivity gains of 50%
+                    <strong className="text-accent">Analytics:</strong> Leveraging GA4 & attribution tools for actionable insights
                   </span>
                 </motion.li>
-                <motion.li
-                  className="flex items-start"
-                  custom={3}
-                  initial="hidden"
-                  animate={isInView ? "visible" : "hidden"}
-                  variants={listItemVariants}
-                >
+                <motion.li className="flex items-start" custom={3} initial="hidden" animate={isInView ? "visible" : "hidden"} variants={listItemVariants}>
                   <span className="inline-block mr-3 mt-1">
                     <BarChart className="w-4 h-4 text-primary" />
                   </span>
                   <span>
-                    <strong className="text-primary">Strategic Implementation:</strong> The key is not just adopting AI,
-                    but strategically implementing it to transform core business processes
+                    <strong className="text-primary">Growth:</strong> Scaling campaigns across multiple channels and markets
                   </span>
                 </motion.li>
               </ul>
@@ -226,7 +214,7 @@ export default function AboutSection() {
                 transition={{ duration: 0.5, delay: 1.0 }}
               >
                 <p className="text-center text-sm italic">
-                  "In today's market, AI automation isn't just an advantage—it's becoming the price of entry."
+                  "AI isn’t replacing marketers—it’s empowering them to scale smarter."
                 </p>
               </motion.div>
             </motion.div>
