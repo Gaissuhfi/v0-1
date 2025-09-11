@@ -9,9 +9,9 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
 const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-space" })
 
 export const metadata: Metadata = {
-  title: "Ibrahim Mustafa | AI Automation Expert",
-  description: "Portfolio of Ibrahim Mustafa, AI Automation Expert",
-    generator: 'v0.app'
+  title: "Gaius Chen | Performance Marketing Specialist",
+  description: "Portfolio of Gaius Chen, Paid Media & Performance Marketing Expert",
+  generator: 'v0.app'
 }
 
 export default function RootLayout({
