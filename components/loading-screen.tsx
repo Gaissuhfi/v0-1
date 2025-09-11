@@ -6,14 +6,12 @@ import { motion, AnimatePresence } from "framer-motion"
 
 export default function LoadingScreen() {
   const [loading, setLoading] = useState(true)
-  const name = "Ibrahim Mustafa"
+  const name = "Gaius Chen"
 
   useEffect(() => {
-    // Simple timeout to hide loading screen
     const timer = setTimeout(() => {
       setLoading(false)
     }, 3000)
-
     return () => clearTimeout(timer)
   }, [])
 
@@ -29,10 +27,7 @@ export default function LoadingScreen() {
     exit: {
       opacity: 0,
       scale: 0.8,
-      transition: {
-        duration: 0.5,
-        ease: "easeInOut",
-      },
+      transition: { duration: 0.5, ease: "easeInOut" },
     },
   }
 
@@ -41,10 +36,7 @@ export default function LoadingScreen() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: {
-        duration: 0.8,
-        ease: "easeOut",
-      },
+      transition: { duration: 0.8, ease: "easeOut" },
     },
   }
 
@@ -53,10 +45,7 @@ export default function LoadingScreen() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut",
-      },
+      transition: { duration: 0.6, ease: "easeOut" },
     },
   }
 
@@ -64,11 +53,7 @@ export default function LoadingScreen() {
     hidden: { width: "0%" },
     visible: {
       width: "100%",
-      transition: {
-        duration: 2,
-        ease: "easeInOut",
-        delay: 0.5,
-      },
+      transition: { duration: 2, ease: "easeInOut", delay: 0.5 },
     },
   }
 
@@ -78,11 +63,7 @@ export default function LoadingScreen() {
       x: [0, 10, -10, 0],
       opacity: [0.3, 1, 0.3],
       scale: [0.8, 1.2, 0.8],
-      transition: {
-        duration: 3,
-        repeat: Number.POSITIVE_INFINITY,
-        ease: "easeInOut",
-      },
+      transition: { duration: 3, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" },
     },
   }
 
@@ -96,7 +77,7 @@ export default function LoadingScreen() {
           animate="visible"
           exit="exit"
         >
-          {/* Animated particles */}
+          {/* 粒子背景 */}
           <div className="absolute inset-0 overflow-hidden">
             {Array.from({ length: 20 }).map((_, i) => (
               <motion.div
@@ -109,22 +90,19 @@ export default function LoadingScreen() {
                 }}
                 variants={particleVariants}
                 animate="animate"
-                transition={{
-                  delay: Math.random() * 2,
-                  duration: 2 + Math.random() * 2,
-                }}
+                transition={{ delay: Math.random() * 2, duration: 2 + Math.random() * 2 }}
               />
             ))}
           </div>
 
           <div className="flex flex-col items-center justify-center z-10 relative">
-            {/* Avatar */}
+            {/* 頭像 */}
             <motion.div className="mb-6" variants={itemVariants}>
               <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-primary/50 relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 animate-pulse" />
                 <Image
-                  src="/images/ibrahim-avatar.png"
-                  alt="Ibrahim Mustafa"
+                  src="/images/gaius-avatar.png"
+                  alt="Gaius Chen"
                   width={96}
                   height={96}
                   className="w-full h-full object-cover relative z-10"
@@ -133,17 +111,15 @@ export default function LoadingScreen() {
               </div>
             </motion.div>
 
-            {/* Name */}
-            <motion.div className="mb-8" variants={itemVariants}>
+            {/* 名字 */}
+            <motion.div className="mb-6" variants={itemVariants}>
               <h1 className="text-4xl md:text-6xl font-heading font-bold">
                 {name.split("").map((letter, index) => (
                   <motion.span
                     key={index}
                     className="inline-block"
                     variants={letterVariants}
-                    transition={{
-                      delay: index * 0.1,
-                    }}
+                    transition={{ delay: index * 0.1 }}
                   >
                     {letter === " " ? "\u00A0" : letter}
                   </motion.span>
@@ -151,7 +127,12 @@ export default function LoadingScreen() {
               </h1>
             </motion.div>
 
-            {/* Progress Bar */}
+            {/* 職稱 */}
+            <motion.div className="mb-4 text-lg text-blue-400 font-medium" variants={itemVariants}>
+              Performance Marketing Expert
+            </motion.div>
+
+            {/* 進度條 */}
             <motion.div className="w-64 h-1 bg-gray-800 rounded-full overflow-hidden mb-4" variants={itemVariants}>
               <motion.div
                 className="h-full bg-gradient-to-r from-primary to-secondary rounded-full"
@@ -159,24 +140,20 @@ export default function LoadingScreen() {
               />
             </motion.div>
 
-            {/* Loading Text */}
+            {/* 載入文字 */}
             <motion.div
               className="text-sm text-gray-400"
               variants={itemVariants}
               animate={{
                 opacity: [0.5, 1, 0.5],
-                transition: {
-                  duration: 2,
-                  repeat: Number.POSITIVE_INFINITY,
-                  ease: "easeInOut",
-                },
+                transition: { duration: 2, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" },
               }}
             >
-              Initializing AI Automation...
+              Loading Portfolio...
             </motion.div>
           </div>
 
-          {/* Background effects */}
+          {/* 背景光暈 */}
           <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,rgba(var(--primary),0.1),transparent_70%)]" />
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full bg-gradient-to-r from-primary/5 to-secondary/5 blur-3xl" />
         </motion.div>
