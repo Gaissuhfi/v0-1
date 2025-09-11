@@ -99,7 +99,7 @@ export default function HeroSection() {
           <div className="p-6 rounded-2xl bg-[#12182b] shadow-xl text-center w-80">
             <AnimatedAvatar />
             <h3 className="text-xl font-semibold mt-4">Gaius</h3>
-            <p className="text-blue-400">Performance Marketing Specialist</p>
+            <p className="text-blue-400">Performance Marketing Expert</p>
             <div className="mt-4 grid grid-cols-2 gap-4 text-sm text-gray-300">
               <div>
                 <span className="block text-2xl font-bold text-blue-400">4+</span>
