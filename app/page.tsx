@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import FloatingSidebar from "@/components/floating-sidebar"
-import HeroSectionNew from "@/components/hero-section-new"
+import HeroSection from "@/components/hero-section"
 import StatsSection from "@/components/stats-section"
 import ServicesSection from "@/components/services-section-visual"
 import AboutSection from "@/components/about-section"
@@ -50,7 +50,7 @@ export default function Home() {
         <>
           <FloatingSidebar />
           <SectionIndicators />
-          <HeroSectionNew />
+          <HeroSection />
           <AboutSection />
           <ServicesSection />
           <ProjectsSection />
