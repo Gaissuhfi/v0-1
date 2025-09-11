@@ -9,7 +9,7 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
 const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-space" })
 
 export const metadata: Metadata = {
-  title: "Gaius Chen | Performance Marketing Specialist",
+  title: "Gaius Chen | Performance Marketing Expert",
   description: "Portfolio of Gaius Chen, Paid Media & Performance Marketing Expert",
   generator: 'v0.app'
 }
