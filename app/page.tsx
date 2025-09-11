@@ -25,7 +25,7 @@ export default function Home() {
 
     // Preload the avatar image
     const avatarImage = new Image()
-    avatarImage.src = "/images/ibrahim-avatar.png"
+    avatarImage.src = "/images/gaius-avatar.png"
     avatarImage.onload = () => {
       console.log("Avatar image loaded")
     }
