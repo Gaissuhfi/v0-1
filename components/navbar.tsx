@@ -33,7 +33,7 @@ export default function Navbar() {
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
         <Link href="#home" className="text-2xl font-heading font-bold text-gradient">
-          Ibrahim M.
+          Gaius C.
         </Link>
 
         <nav className="hidden md:flex items-center space-x-8">
