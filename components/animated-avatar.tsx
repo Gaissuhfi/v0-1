@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
 import { motion } from "framer-motion"
 
-// Dynamically import anime.js to ensure it only runs on the client
 const AnimePromise = import("animejs").then((mod) => mod.default || mod)
 
 export default function AnimatedAvatar() {
@@ -12,10 +11,8 @@ export default function AnimatedAvatar() {
   const [animeLoaded, setAnimeLoaded] = useState(false)
 
   useEffect(() => {
-    // Only run this effect on the client side
     if (typeof window === "undefined") return
 
-    // Load anime.js dynamically
     let anime: any
     const elements: HTMLDivElement[] = []
     let cleanup: (() => void) | undefined
@@ -27,7 +24,6 @@ export default function AnimatedAvatar() {
 
         if (!containerRef.current || !anime) return
 
-        // Create floating elements around the avatar
         const container = containerRef.current
         const shapes = 6
         const colors = ["#fc52ff", "#00e1f4", "#ffb800"]
@@ -44,7 +40,6 @@ export default function AnimatedAvatar() {
           element.style.boxShadow = `0 0 10px ${color}`
           element.style.zIndex = "1"
 
-          // Position elements in a circle around the avatar
           const angle = (i / shapes) * Math.PI * 2
           const radius = 140
           const x = Math.cos(angle) * radius + 150
@@ -56,7 +51,6 @@ export default function AnimatedAvatar() {
           container.appendChild(element)
           elements.push(element)
 
-          // Animate each element
           anime({
             targets: element,
             translateX: anime.random(-20, 20),
@@ -71,7 +65,6 @@ export default function AnimatedAvatar() {
           })
         }
 
-        // Create glowing effect for the avatar
         anime({
           targets: ".avatar-glow",
           boxShadow: [
@@ -86,7 +79,6 @@ export default function AnimatedAvatar() {
           loop: true,
         })
 
-        // Set up cleanup function
         cleanup = () => {
           elements.forEach((element) => {
             if (container.contains(element)) {
@@ -100,8 +92,6 @@ export default function AnimatedAvatar() {
     }
 
     initializeAnimation()
-
-    // Cleanup function
     return () => {
       if (cleanup) cleanup()
     }
@@ -129,25 +119,26 @@ export default function AnimatedAvatar() {
         <div className="avatar-glow rounded-full p-1 bg-gradient-to-r from-primary to-secondary">
           <div className="bg-card rounded-full p-2 backdrop-blur-sm">
             <div className="relative w-[280px] h-[280px] rounded-full overflow-hidden border-2 border-white/10">
-              <Image src="/images/ibrahim-avatar.png" alt="Ibrahim Mustafa" fill className="object-cover" priority />
+              {/* 換頭像的地方 👇 */}
+              <Image src="/images/gaius-avatar.png" alt="Gaius" fill className="object-cover" priority />
             </div>
           </div>
         </div>
       </motion.div>
 
-      {/* Background circle */}
+      {/* 背景光圈 */}
       <div className="absolute inset-0 flex items-center justify-center">
         <div className="w-[320px] h-[320px] rounded-full bg-gradient-to-r from-primary/10 to-secondary/10 blur-xl"></div>
       </div>
 
-      {/* Text element */}
+      {/* Badge */}
       <motion.div
         className="absolute bottom-5 left-1/2 transform -translate-x-1/2 bg-card/80 backdrop-blur-sm px-4 py-2 rounded-full border border-white/10"
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 1, duration: 0.5 }}
       >
-        <span className="text-sm font-medium text-gradient">AI Automation Expert</span>
+        <span className="text-sm font-medium text-gradient">Paid Media Expert</span>
       </motion.div>
     </motion.div>
   )
