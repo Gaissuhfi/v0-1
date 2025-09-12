@@ -1,36 +1,50 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Target, BarChart, Layers, Brain } from "lucide-react"
+import { Target, BarChart, Layers, Brain, ShoppingBag, Smartphone } from "lucide-react"
 
 const services = [
   {
     title: "Paid Media Strategy",
     description:
-      "Full-funnel campaign planning across Google, Meta, TikTok, and ASA to build scalable and sustainable growth.",
+      "Full-funnel campaign planning across Google, Meta, TikTok, and ASA — maximizing growth with precise targeting.",
     icon: Target,
     gradient: "from-pink-500 via-purple-500 to-indigo-500",
   },
   {
     title: "Campaign Optimization",
     description:
-      "Lower CPL, improve ROAS, and maximize conversions with data-driven optimization and automated A/B testing.",
+      "Cut CPL, boost ROAS, and scale campaigns through A/B testing and real-time data optimization.",
     icon: BarChart,
     gradient: "from-indigo-500 via-blue-500 to-cyan-500",
   },
   {
     title: "Performance Analytics",
     description:
-      "Integrating GA4, AppsFlyer, and Looker Studio to turn raw data into actionable insights and live dashboards.",
+      "Turn GA4, AppsFlyer, and Looker Studio into actionable insights for smarter ad decisions.",
     icon: Layers,
     gradient: "from-purple-500 via-fuchsia-500 to-pink-500",
   },
   {
     title: "AI Tools Integration",
     description:
-      "Leverage GPT, Midjourney, Heygen, v0, and Lovable to boost creativity, automate workflows, and improve collaboration.",
+      "Use GPT, Midjourney, Heygen, v0, and more to accelerate your workflow and creativity.",
     icon: Brain,
     gradient: "from-cyan-500 via-teal-500 to-emerald-500",
+  },
+  {
+    title: "E-commerce Growth Strategy",
+    description:
+      "Build and scale D2C channels with multi-platform ads. Focus on conversion rate, lifetime value, and sustainable growth.",
+    icon: ShoppingBag,
+    gradient: "from-amber-500 via-orange-500 to-pink-500",
+  },
+  {
+    title: "App Marketing & User Acquisition",
+    description:
+      "Boost installs and retention with optimized UAC, ASA, and cross-channel campaigns. Drive efficiency with AppsFlyer insights.",
+    icon: Smartphone,
+    gradient: "from-green-400 via-emerald-500 to-teal-500",
   },
 ]
 
@@ -47,7 +61,7 @@ export default function ServicesSection() {
         </div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => {
             const Icon = service.icon
             return (
