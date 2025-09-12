@@ -98,51 +98,10 @@ export default function AboutSection() {
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ duration: 0.5, delay: 0.6 }}
               >
-                Specialized in optimizing CPL, CPF, and CPI with a proven track record of reducing acquisition costs and
+                Specialized in optimizing CPL, CPA, and CPI with a proven track record of reducing acquisition costs and
                 scaling campaigns effectively. Skilled in Google Ads, Meta Ads, Apple Search Ads, TikTok Ads, and advanced
                 analytics with GA4, AppsFlyer, and Looker Studio.
               </motion.p>
-
-              {/* 技能標籤 */}
-              <motion.div
-                className="mt-6 pt-6 border-t border-white/10"
-                initial={{ opacity: 0 }}
-                animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-                transition={{ duration: 0.5, delay: 0.7 }}
-              >
-                <div className="flex flex-wrap gap-3">
-                  {[
-                    "Google Ads",
-                    "Meta Ads",
-                    "Apple Search Ads",
-                    "TikTok Ads",
-                    "GA4 & Looker Studio",
-                    "AppsFlyer",
-                    "Midjourney",
-                    "Heygen",
-                    "GPT",
-                    "Gemini",
-                    "v0",
-                    "Loveable",
-                  ].map((skill, index) => (
-                    <motion.span
-                      key={skill}
-                      className={`px-3 py-1 text-xs rounded-full glass border ${
-                        index % 3 === 0
-                          ? "border-primary/20 bg-primary/10"
-                          : index % 3 === 1
-                          ? "border-secondary/20 bg-secondary/10"
-                          : "border-accent/20 bg-accent/10"
-                      }`}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-                      transition={{ duration: 0.3, delay: 0.8 + index * 0.1 }}
-                    >
-                      {skill}
-                    </motion.span>
-                  ))}
-                </div>
-              </motion.div>
 
               {/* 引言 */}
               <motion.div
@@ -207,6 +166,51 @@ export default function AboutSection() {
                 </motion.li>
               </ul>
 
+              {/* 技能標籤 - 移到右側 */}
+              <motion.div
+                className="mt-6 pt-6 border-t border-white/10"
+                initial={{ opacity: 0 }}
+                animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+                transition={{ duration: 0.5, delay: 0.7 }}
+              >
+                <div className="flex flex-wrap gap-3">
+                  {[
+                    "Google Ads",
+                    "Meta Ads",
+                    "Apple Ads",
+                    "TikTok Ads",
+                    "GA4 & Looker Studio",
+                    "AppsFlyer",
+                    "Tableau",
+                    "Mixpanel",
+                    "Midjourney",
+                    "Heygen",
+                    "GPT",
+                    "Gemini",
+                    "v0",
+                    "Loveable",
+                    "Claude",
+                  ].map((skill, index) => (
+                    <motion.span
+                      key={skill}
+                      className={`px-3 py-1 text-xs rounded-full glass border ${
+                        index % 3 === 0
+                          ? "border-primary/20 bg-primary/10"
+                          : index % 3 === 1
+                          ? "border-secondary/20 bg-secondary/10"
+                          : "border-accent/20 bg-accent/10"
+                      }`}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+                      transition={{ duration: 0.3, delay: 0.8 + index * 0.1 }}
+                    >
+                      {skill}
+                    </motion.span>
+                  ))}
+                </div>
+              </motion.div>
+
+              {/* 引言 */}
               <motion.div
                 className="mt-6 gradient-border p-4"
                 initial={{ opacity: 0, scale: 0.9 }}
