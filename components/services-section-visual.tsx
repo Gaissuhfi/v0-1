@@ -6,31 +6,27 @@ import { ArrowRight, BarChart, Target, Layers, Brain } from "lucide-react"
 const services = [
   {
     title: "Paid Media Strategy",
-    description: "Multi-channel campaign planning and execution across Google, Meta, TikTok, and more.",
+    description: "Full-funnel planning across Google, Meta, TikTok & ASA — maximizing growth with precision targeting.",
     icon: Target,
-    size: "large",
-    action: "chatbot:strategy",
+    gradient: "from-pink-500 via-purple-500 to-indigo-500",
   },
   {
     title: "Campaign Optimization",
-    description: "Lower CPL, improve ROAS, and maximize conversions with data-driven optimization.",
+    description: "Cut CPL, boost ROAS, and scale campaigns through A/B testing and real-time data optimization.",
     icon: BarChart,
-    size: "small",
-    action: "chatbot:optimization",
+    gradient: "from-indigo-500 via-blue-500 to-cyan-500",
   },
   {
     title: "Performance Analytics",
-    description: "GA4, AppsFlyer, Looker Studio—turn raw data into actionable insights.",
+    description: "Turn GA4, AppsFlyer, and Looker Studio into actionable insights for smarter ad decisions.",
     icon: Layers,
-    size: "small",
-    action: "chatbot:analytics",
+    gradient: "from-purple-500 via-fuchsia-500 to-pink-500",
   },
   {
     title: "AI Tools Integration",
-    description: "Use GPT, Midjourney, Heygen, v0, and more to supercharge your advertising workflow.",
+    description: "Leverage GPT, Midjourney, Heygen, v0, and more to accelerate your workflow and creativity.",
     icon: Brain,
-    size: "medium",
-    action: "chatbot:ai",
+    gradient: "from-cyan-500 via-teal-500 to-emerald-500",
   },
 ]
 
@@ -47,7 +43,7 @@ export default function ServicesSection() {
         </div>
 
         {/* 卡片排版 */}
-        <div className="grid md:grid-cols-3 gap-6 auto-rows-[200px]">
+        <div className="grid md:grid-cols-3 gap-6 auto-rows-[220px]">
           {services.map((service, index) => {
             const Icon = service.icon
             return (
@@ -56,30 +52,35 @@ export default function ServicesSection() {
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 200, damping: 15 }}
                 className={`
-                  relative rounded-2xl p-6 md:p-8 text-white cursor-pointer
-                  bg-gradient-to-r from-purple-500/20 via-pink-500/20 to-blue-500/20
-                  backdrop-blur-xl border border-white/10 shadow-lg
-                  ${service.size === "large" ? "md:row-span-2" : ""}
-                  ${service.size === "medium" ? "md:col-span-2" : ""}
+                  relative rounded-2xl p-6 md:p-8 cursor-pointer
+                  bg-gradient-to-br ${service.gradient} 
+                  backdrop-blur-xl shadow-xl
+                  group overflow-hidden
                 `}
               >
-                <div className="flex flex-col h-full justify-between">
-                  <div>
-                    <div className="w-12 h-12 flex items-center justify-center rounded-xl bg-white/10 mb-4">
-                      <Icon className="w-6 h-6 text-primary" />
-                    </div>
-                    <h3 className="text-xl font-bold mb-2">{service.title}</h3>
-                    <p className="text-sm text-gray-300">{service.description}</p>
+                <div className="flex flex-col h-full justify-between relative z-10">
+                  {/* Icon */}
+                  <div className="w-14 h-14 flex items-center justify-center rounded-xl bg-white/10 group-hover:scale-110 transition-all duration-300 shadow-lg">
+                    <Icon className="w-7 h-7 text-white drop-shadow-glow" />
                   </div>
 
-                  {/* 右下角箭頭按鈕 */}
-                  <button
-                    onClick={() => console.log("Trigger chatbot:", service.action)}
-                    className="absolute bottom-4 right-4 w-10 h-10 rounded-full bg-white/20 flex items-center justify-center hover:bg-primary transition"
+                  {/* Title */}
+                  <h3 className="text-xl md:text-2xl font-bold mt-4 mb-2">{service.title}</h3>
+
+                  {/* Description */}
+                  <p className="text-sm text-gray-200 leading-relaxed">{service.description}</p>
+
+                  {/* Arrow Btn */}
+                  <motion.button
+                    whileHover={{ x: 5 }}
+                    className="absolute bottom-4 right-4 w-10 h-10 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/40 transition"
                   >
-                    <ArrowRight className="w-5 h-5" />
-                  </button>
+                    <ArrowRight className="w-5 h-5 text-white" />
+                  </motion.button>
                 </div>
+
+                {/* Hover Glow */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-30 bg-white blur-3xl transition-all duration-500" />
               </motion.div>
             )
           })}
