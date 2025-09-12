@@ -2,50 +2,50 @@
 
 import { useRef, useEffect } from "react"
 import { motion, useInView, useAnimation } from "framer-motion"
-import { Brain, Workflow, BarChart3, MessageSquare, Code, Database } from "lucide-react"
+import { Target, BarChart3, Layers, Brain, ShoppingCart, DollarSign } from "lucide-react"
 
 const services = [
   {
-    icon: Brain,
-    title: "AI Development",
-    description: "Custom AI solutions tailored to your business needs",
-    features: ["Machine Learning Models", "Neural Networks", "Computer Vision", "NLP Solutions"],
-    color: "from-primary to-primary/60",
-  },
-  {
-    icon: Workflow,
-    title: "Process Automation",
-    description: "Streamline workflows and eliminate repetitive tasks",
-    features: ["RPA Implementation", "Workflow Optimization", "API Integration", "Task Automation"],
-    color: "from-secondary to-secondary/60",
+    icon: Target,
+    title: "Paid Media Strategy",
+    description: "Full-funnel campaign planning and execution across Google, Meta, TikTok, and ASA.",
+    features: ["Google Ads", "Meta Ads", "TikTok Ads", "Apple Search Ads"],
+    color: "from-pink-500 to-purple-500",
   },
   {
     icon: BarChart3,
-    title: "Data Analytics",
-    description: "Transform raw data into actionable business insights",
-    features: ["Predictive Analytics", "Data Visualization", "Business Intelligence", "Performance Metrics"],
-    color: "from-accent to-accent/60",
+    title: "Campaign Optimization",
+    description: "Driving efficiency and growth with data-driven testing and automation.",
+    features: ["A/B Testing", "CPL Reduction", "ROAS Boost", "Automation"],
+    color: "from-blue-500 to-indigo-500",
   },
   {
-    icon: MessageSquare,
-    title: "Chatbot Development",
-    description: "Intelligent conversational interfaces for customer engagement",
-    features: ["Natural Language Processing", "Multi-platform Support", "Voice Integration", "24/7 Availability"],
-    color: "from-primary to-secondary",
+    icon: Layers,
+    title: "Performance Analytics",
+    description: "Transforming multi-channel data into actionable insights and ROI dashboards.",
+    features: ["GA4", "AppsFlyer", "Looker Studio", "Tableau"],
+    color: "from-purple-500 to-pink-500",
   },
   {
-    icon: Code,
-    title: "Custom Software",
-    description: "Bespoke software solutions for unique business requirements",
-    features: ["Full-stack Development", "API Development", "System Integration", "Cloud Solutions"],
-    color: "from-secondary to-accent",
+    icon: Brain,
+    title: "AI Tools Integration",
+    description: "Enhancing workflow and creativity with cutting-edge AI tools.",
+    features: ["GPT", "Midjourney", "Heygen", "v0 & Lovable"],
+    color: "from-green-400 to-teal-500",
   },
   {
-    icon: Database,
-    title: "Data Management",
-    description: "Efficient data storage, processing, and management systems",
-    features: ["Database Design", "Data Migration", "Real-time Processing", "Data Security"],
-    color: "from-accent to-primary",
+    icon: ShoppingCart,
+    title: "E-commerce Growth Leadership",
+    description: "Scaling APAC campaigns and launching D2C initiatives with measurable impact.",
+    features: ["Shopee Top-3 APAC", "D2C Growth", "Margin +12%", "Multi-market Strategy"],
+    color: "from-orange-400 to-red-500",
+  },
+  {
+    icon: DollarSign,
+    title: "Financial Ads Expertise",
+    description: "Lead generation and in-house campaign management for fintech products.",
+    features: ["Lead Gen", "CPL Optimization", "Compliance", "In-house Transition"],
+    color: "from-yellow-400 to-orange-500",
   },
 ]
 
@@ -55,19 +55,14 @@ export default function ServicesSection() {
   const controls = useAnimation()
 
   useEffect(() => {
-    if (isInView) {
-      controls.start("visible")
-    }
+    if (isInView) controls.start("visible")
   }, [isInView, controls])
 
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
+      transition: { staggerChildren: 0.1, delayChildren: 0.2 },
     },
   }
 
@@ -81,7 +76,7 @@ export default function ServicesSection() {
   }
 
   return (
-    <section className="py-20 md:py-32 relative">
+    <section id="services" className="py-20 md:py-32 relative">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-card/20 to-transparent"></div>
 
       <div className="container mx-auto px-4">
@@ -95,7 +90,7 @@ export default function ServicesSection() {
             MY BEST QUALITY <span className="text-gradient italic">SERVICES</span>
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Delivering cutting-edge AI and automation solutions that transform businesses and drive innovation
+            Real-world expertise in paid media, analytics, and AI-driven growth — proven across fintech, e-commerce, and app marketing.
           </p>
           <div className="h-1 w-24 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto mt-6"></div>
         </motion.div>
@@ -109,7 +104,6 @@ export default function ServicesSection() {
         >
           {services.map((service, index) => {
             const Icon = service.icon
-
             return (
               <motion.div key={index} variants={itemVariants} className="group relative">
                 <div className="glass rounded-2xl p-8 border border-white/10 hover:border-white/20 transition-all duration-500 relative overflow-hidden h-full">
@@ -118,8 +112,8 @@ export default function ServicesSection() {
                     className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-5 group-hover:opacity-10 transition-opacity duration-500`}
                   ></div>
 
-                  {/* Animated Border */}
-                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary via-secondary to-accent opacity-0 group-hover:opacity-20 transition-opacity duration-500 blur-sm"></div>
+                  {/* Hover Glow Effect */}
+                  <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl -z-10"></div>
 
                   <div className="relative z-10">
                     {/* Icon */}
@@ -135,7 +129,6 @@ export default function ServicesSection() {
                     <h3 className="text-2xl font-bold mb-4 group-hover:text-primary transition-colors duration-300">
                       {service.title}
                     </h3>
-
                     <p className="text-gray-300 mb-6 leading-relaxed">{service.description}</p>
 
                     {/* Features */}
@@ -154,9 +147,6 @@ export default function ServicesSection() {
                       ))}
                     </ul>
                   </div>
-
-                  {/* Hover Glow Effect */}
-                  <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl -z-10"></div>
                 </div>
               </motion.div>
             )
