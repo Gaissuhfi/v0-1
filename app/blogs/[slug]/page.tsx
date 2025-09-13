@@ -84,14 +84,23 @@ const blogPosts: BlogPost[] = [
           A New AI Era: From Workshop to Market Success
         </h2>
         <p>
-          At my current company, we organized internal <strong>AI workshops</strong> with marketing experts
-          to explore tools like GPT, Claude, v0, and Heygen. The most remarkable milestone came when we successfully deployed{" "}
-          <strong>Heygen-generated video creatives</strong> in a highly regulated financial industry.
+          In a more recent role, we organized internal <strong>AI workshops</strong> with marketing experts
+          to explore tools like GPT, Claude, v0, and Heygen. One remarkable milestone came when we successfully deployed{" "}
+          <strong>Heygen-generated video creatives</strong> in a highly regulated industry, proving AI adoption is possible even under strict compliance.
         </p>
         <p>
           Beyond creative production, tools like GPT and Claude have helped me cut my daily workflows by nearly{" "}
           <strong>80%—reducing time by one fifth</strong> while increasing output quality.
           Much of this came from automating reports, Excel workflows, and even ad copy generation.
+        </p>
+
+        <h2 className="text-2xl font-bold text-white border-l-4 border-purple-400 pl-3">
+          Looking Ahead
+        </h2>
+        <p>
+          The biggest opportunity is not just about using AI tools individually, but about integrating them into a{" "}
+          unified marketing workflow—from ideation to measurement—so teams can achieve both{" "}
+          <strong>efficiency</strong> and <strong>creativity</strong> at scale.
         </p>
       </div>
     ),
