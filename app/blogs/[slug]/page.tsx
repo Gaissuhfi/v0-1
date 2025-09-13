@@ -8,7 +8,6 @@ import {
   Clock,
   User,
   ArrowLeft,
-  ArrowRight,
   Brain,
   Zap,
   Database,
@@ -84,23 +83,14 @@ const blogPosts: BlogPost[] = [
           A New AI Era: From Workshop to Market Success
         </h2>
         <p>
-          In a more recent role, we organized internal <strong>AI workshops</strong> with marketing experts
-          to explore tools like GPT, Claude, v0, and Heygen. One remarkable milestone came when we successfully deployed{" "}
-          <strong>Heygen-generated video creatives</strong> in a highly regulated industry, proving AI adoption is possible even under strict compliance.
+          At my current company, we organized internal <strong>AI workshops</strong> with marketing experts
+          to explore tools like GPT, Claude, v0, and Heygen. The most remarkable milestone came when we successfully deployed{" "}
+          <strong>Heygen-generated video creatives</strong> in a highly regulated financial industry.
         </p>
         <p>
           Beyond creative production, tools like GPT and Claude have helped me cut my daily workflows by nearly{" "}
           <strong>80%—reducing time by one fifth</strong> while increasing output quality.
           Much of this came from automating reports, Excel workflows, and even ad copy generation.
-        </p>
-
-        <h2 className="text-2xl font-bold text-white border-l-4 border-purple-400 pl-3">
-          Looking Ahead
-        </h2>
-        <p>
-          The biggest opportunity is not just about using AI tools individually, but about integrating them into a{" "}
-          unified marketing workflow—from ideation to measurement—so teams can achieve both{" "}
-          <strong>efficiency</strong> and <strong>creativity</strong> at scale.
         </p>
       </div>
     ),
@@ -229,9 +219,6 @@ export default function BlogPost() {
     )
   }
 
-  const prevPost = blogPosts[currentIndex - 1]
-  const nextPost = blogPosts[currentIndex + 1]
-
   return (
     <div className="min-h-screen bg-[#0a0a0f] relative overflow-hidden">
       {/* Background Effects */}
@@ -278,20 +265,6 @@ export default function BlogPost() {
           </CardContent>
         </Card>
 
-        {/* Prev/Next Navigation */}
-        <div className="flex justify-between mt-10 text-sm">
-          {prevPost ? (
-            <Link href={`/blog/${prevPost.slug}`} className="text-purple-400 hover:underline flex items-center gap-2">
-              <ArrowLeft className="w-4 h-4" /> {prevPost.title}
-            </Link>
-          ) : <div />}
-          {nextPost ? (
-            <Link href={`/blog/${nextPost.slug}`} className="text-purple-400 hover:underline flex items-center gap-2">
-              {nextPost.title} <ArrowRight className="w-4 h-4" />
-            </Link>
-          ) : <div />}
-        </div>
-
         {/* Call to Action */}
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.2 }} className="mt-12">
           <Card className="bg-gradient-to-r from-purple-500/10 to-cyan-500/10 border border-purple-500/30">
@@ -302,7 +275,7 @@ export default function BlogPost() {
               </p>
               <a href="#contact">
                 <Button className="bg-gradient-to-r from-purple-500 to-cyan-500 text-white">
-                  Start the Conversation <ArrowRight className="w-4 h-4 ml-2" />
+                  Start the Conversation <ArrowLeft className="w-4 h-4 ml-2" />
                 </Button>
               </a>
             </CardContent>
