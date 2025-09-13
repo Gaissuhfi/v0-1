@@ -30,8 +30,8 @@ interface BlogPost {
 }
 
 const blogPosts: Record<string, BlogPost> = {
-  "ai-tools-marketers": {
-    slug: "ai-tools-marketers",
+  "ai-tools-for-marketers": {
+    slug: "ai-tools-for-marketers",
     title: "AI Tools Every Marketer Should Know",
     excerpt:
       "From Midjourney to Heygen, GPT to v0, how AI has redefined marketing workflows and helped me cut daily work time by 80%.",
