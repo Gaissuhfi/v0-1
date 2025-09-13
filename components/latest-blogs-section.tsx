@@ -2,84 +2,88 @@
 
 import { motion } from "framer-motion"
 import Link from "next/link"
-import Image from "next/image"
-import { Card, CardContent } from "@/components/ui/card"
+import { Calendar, Clock, User } from "lucide-react"
 
-const blogPosts = [
+const blogs = [
   {
-    slug: "ai-tools-marketers",
+    slug: "ai-tools-for-marketers",
     title: "AI Tools Every Marketer Should Know",
-    excerpt:
-      "From Midjourney to Heygen, GPT to v0, how AI has redefined marketing workflows and helped me cut daily work time by 80%.",
-    date: "January 2025",
-    cover: "/images/blogs/ai-tools.jpg", // 封面圖
+    excerpt: "From GPT to Midjourney and Heygen, discover how AI tools are transforming marketing workflows.",
+    date: "Feb 2025",
+    readTime: "7 min",
+    author: "Gaius Chen",
+    category: "AI & Marketing",
   },
   {
     slug: "data-driven-marketing",
     title: "Data-Driven Marketing: How GA4 + AppsFlyer Shape Smarter Campaigns",
-    excerpt:
-      "From GA4 delays to AppsFlyer predictive LTV, here’s how I balance multiple analytics tools for smarter campaign decisions.",
-    date: "January 2025",
-    cover: "/images/blogs/data-driven.jpg", // 封面圖
+    excerpt: "A deep dive into how modern analytics platforms enable smarter, cross-channel marketing strategies.",
+    date: "Feb 2025",
+    readTime: "8 min",
+    author: "Gaius Chen",
+    category: "Analytics",
   },
   {
     slug: "from-zero-to-brand",
-    title: "From Zero to Brand: Building Growth from Scratch",
-    excerpt:
-      "Launching a brand or app isn’t about luck—it’s about disciplined positioning, smart advertising, and relentless PDCA cycles.",
-    date: "January 2025",
-    cover: "/images/blogs/from-zero.jpg", // 封面圖
+    title: "From Zero to Brand: Building from the Ground Up",
+    excerpt: "Lessons from launching apps and e-commerce brands, and why brand-building is an infinite game.",
+    date: "Feb 2025",
+    readTime: "9 min",
+    author: "Gaius Chen",
+    category: "Branding",
   },
 ]
 
 export default function LatestBlogsSection() {
   return (
-    <section id="latest-blogs" className="py-20 md:py-32 bg-[#0a0a0f] relative">
-      <div className="container mx-auto px-4 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-3xl md:text-4xl font-heading font-bold text-white mb-4">
+    <section id="blogs" className="py-20 md:py-32 relative">
+      <div className="container mx-auto px-4">
+        {/* Section Header */}
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-heading font-bold">
             Latest <span className="text-gradient">Blogs</span>
           </h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">
-            Insights on AI tools, analytics, and brand building—directly from my hands-on marketing experience.
-          </p>
-        </motion.div>
+          <div className="h-1 w-24 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto mt-4"></div>
+        </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
-          {blogPosts.map((post, index) => (
+        {/* Blog Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {blogs.map((blog, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              whileHover={{ scale: 1.03 }}
+              className="group relative rounded-2xl border border-white/10 overflow-hidden shadow-lg cursor-pointer"
             >
-              <Card className="bg-gradient-to-br from-gray-900/50 to-gray-800/30 border-gray-700/50 backdrop-blur-sm hover:shadow-lg transition-all overflow-hidden">
-                {/* 封面圖 */}
-                <div className="h-40 w-full overflow-hidden">
-                  <Image
-                    src={post.cover}
-                    alt={post.title}
-                    width={600}
-                    height={300}
-                    className="w-full h-full object-cover transform transition-transform duration-500 hover:scale-105"
-                  />
-                </div>
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-bold text-white mb-3">{post.title}</h3>
-                  <p className="text-gray-400 text-sm mb-4 line-clamp-3">{post.excerpt}</p>
-                  <div className="flex justify-between items-center text-gray-500 text-xs">
-                    <span>{post.date}</span>
-                    <Link href={`/blog/${post.slug}`} className="text-primary hover:underline">
-                      Read more →
-                    </Link>
+              {/* Blog Content */}
+              <Link href={`/blogs/${blog.slug}`}>
+                <div className="bg-gradient-to-br from-gray-900/50 to-gray-800/30 backdrop-blur-md p-8 h-full flex flex-col justify-between transition-all duration-500 group-hover:from-primary/10 group-hover:to-secondary/10">
+                  <div>
+                    <p className="text-sm text-primary font-medium mb-3">{blog.category}</p>
+                    <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-primary transition-colors">
+                      {blog.title}
+                    </h3>
+                    <p className="text-gray-300 text-sm leading-relaxed mb-6 line-clamp-3">{blog.excerpt}</p>
                   </div>
-                </CardContent>
-              </Card>
+
+                  <div className="flex items-center justify-between text-xs text-gray-400">
+                    <div className="flex items-center gap-2">
+                      <User className="w-4 h-4" />
+                      {blog.author}
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Calendar className="w-4 h-4" />
+                      {blog.date}
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Clock className="w-4 h-4" />
+                      {blog.readTime}
+                    </div>
+                  </div>
+                </div>
+              </Link>
             </motion.div>
           ))}
         </div>
