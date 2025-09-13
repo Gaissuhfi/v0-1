@@ -43,7 +43,7 @@ interface BlogPost {
 // 三篇文章內容
 const blogPosts: BlogPost[] = [
   {
-    slug: "ai-tools-marketers",
+    slug: "ai-tools-for-marketers",
     title: "AI Tools Every Marketer Should Know",
     excerpt:
       "From Midjourney to Heygen, GPT to v0, how AI has redefined marketing workflows and helped me cut daily work time by 80%.",
