@@ -78,7 +78,8 @@ const blogPosts: Record<string, BlogPost> = {
         </p>
         <p>
           Beyond creative production, tools like GPT and Claude have helped me cut my daily workflows by nearly{" "}
-          <strong>80%—reducing time by one fifth</strong> while increasing output quality. This is a clear example of how
+          <strong>80%—reducing time by one fifth</strong>. In practice, this came from using GPT/Claude to automate{" "}
+          <strong>Excel reports, campaign tracking sheets, and ad copywriting</strong>. This is a clear example of how
           AI is no longer just experimental—it’s directly shaping revenue and efficiency.
         </p>
       </div>
@@ -120,11 +121,11 @@ const blogPosts: Record<string, BlogPost> = {
 
         <h2 className="text-2xl font-bold text-white">GA4 Delays, Mixpanel Speed, Tableau Depth</h2>
         <p>
-          The biggest challenge with GA4 is the <strong>24–48 hour lag</strong>. Tableau, which our data science team
-          customized for attribution, often added another delay. That meant waiting three to four days for reliable
-          multi-touch attribution. But when you’re spending <strong>tens of thousands of TWD (or euros) daily</strong>,
-          you can’t afford to wait. That’s where Mixpanel’s near-real-time tracking became critical for on-the-fly
-          adjustments.
+          The biggest challenge with GA4 is the <strong>24–48 hour lag</strong> (a{" "}
+          <strong>Google official limitation</strong>). Tableau, which our data science team customized for attribution,
+          often added another delay. That meant waiting three to four days for reliable multi-touch attribution. But
+          when you’re spending <strong>tens of thousands of TWD (or euros) daily</strong>, you can’t afford to wait.
+          That’s where Mixpanel’s near-real-time tracking became critical for on-the-fly adjustments.
         </p>
 
         <h2 className="text-2xl font-bold text-white">The Takeaway</h2>
@@ -166,9 +167,10 @@ const blogPosts: Record<string, BlogPost> = {
         <p>
           Another project was a Japanese lifestyle e-commerce brand. While multiple teams managed different APAC
           countries, I was responsible for <strong>Taiwan advertising</strong>. Through catalog ads, A/B testing, and
-          bundled offers, our team achieved <strong>top three performance in the region</strong>. The platform advantage
-          and curated product sourcing gave us a competitive edge, but disciplined campaign execution made the
-          difference.
+          bundled offers, our team achieved <strong>top three performance in the region</strong>. (Note: this ranking
+          refers to <strong>subsidiary-level performance within APAC branches</strong>, not overall market share.) The
+          platform advantage and curated product sourcing gave us a competitive edge, but disciplined campaign execution
+          made the difference.
         </p>
 
         <h2 className="text-2xl font-bold text-white">App Launch: Creative, Channels, and PDCA</h2>
