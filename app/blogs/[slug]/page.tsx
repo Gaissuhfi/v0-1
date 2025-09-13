@@ -44,7 +44,7 @@ interface BlogPost {
 // 三篇文章內容
 const blogPosts: BlogPost[] = [
   {
-    slug: "ai-tools-for-marketers",
+    slug: "ai-tools-marketers",
     title: "AI Tools Every Marketer Should Know",
     excerpt:
       "From Midjourney to Heygen, GPT to v0, how AI has redefined marketing workflows and helped me cut daily work time by 80%.",
@@ -265,7 +265,8 @@ export default function BlogPost() {
               </div>
             </div>
 
-            <div className="px-8 pb-8 prose prose-invert max-w-none">{post.content}</div>
+            {/* ✅ 文章完整顯示 */}
+            <div className="px-8 pb-8 text-gray-300 space-y-8">{post.content}</div>
           </CardContent>
         </Card>
 
@@ -291,7 +292,8 @@ export default function BlogPost() {
               <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
                 Let’s discuss how AI, analytics, and brand building can take your marketing to the next level.
               </p>
-              <Link href="/#get-in-touch">
+              {/* ✅ 正確跳轉到 contact 區塊 */}
+              <Link href="/#contact">
                 <Button className="bg-gradient-to-r from-purple-500 to-cyan-500 text-white">
                   Start the Conversation <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
