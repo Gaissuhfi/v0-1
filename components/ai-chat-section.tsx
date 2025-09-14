@@ -260,7 +260,7 @@ export default function AIChatSection() {
           className="text-center mb-12"
         >
           <motion.h2 variants={itemVariants} className="text-3xl md:text-4xl font-heading font-bold mb-4">
-            Chat with <span className="text-gradient">AI Ibro</span>
+            Chat with <span className="text-gradient">AI Bro</span>
           </motion.h2>
           <motion.p variants={itemVariants} className="text-gray-300 max-w-2xl mx-auto">
             Ask about my work experience, skills, projects, or extended marketing services
@@ -285,7 +285,7 @@ export default function AIChatSection() {
                   <Bot className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <h3 className="font-medium">AI Ibro</h3>
+                  <h3 className="font-medium">AI Bro</h3>
                   <p className="text-xs text-gray-400">Virtual Assistant</p>
                 </div>
               </div>
@@ -314,7 +314,7 @@ export default function AIChatSection() {
                       ) : (
                         <User size={16} className="text-secondary" />
                       )}
-                      <span className="text-xs font-medium">{message.role === "assistant" ? "AI Ibro" : "You"}</span>
+                      <span className="text-xs font-medium">{message.role === "assistant" ? "AI Bro" : "You"}</span>
                     </div>
                     <div className="text-sm rich-text" dangerouslySetInnerHTML={{ __html: formatMessage(message.content) }} />
                   </div>
@@ -326,7 +326,7 @@ export default function AIChatSection() {
                   <div className="max-w-[80%] rounded-2xl p-3 bg-card/50 text-white">
                     <div className="flex items-center gap-2 mb-1">
                       <Bot size={16} className="text-primary" />
-                      <span className="text-xs font-medium">AI Ibro</span>
+                      <span className="text-xs font-medium">AI Bro</span>
                     </div>
                     <div className="flex gap-1">
                       <span className="w-2 h-2 rounded-full bg-primary animate-bounce"></span>
@@ -375,7 +375,7 @@ export default function AIChatSection() {
           <motion.div className="mt-8 flex justify-center chat-element" initial={{ opacity: 0, scale: 0.8 }} animate={isInView ? { opacity: 1, scale: 1 } : {}}>
             <div className="relative">
               <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-primary/30">
-                <Image src="/images/avatar.png" alt="Gaius Chen" width={96} height={96} className="w-full h-full object-cover" />
+                <Image src="/images/gaius-avatar.png" alt="Gaius Chen" width={96} height={96} className="w-full h-full object-cover" />
               </div>
               <div className="absolute -bottom-2 -right-2 w-8 h-8 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center">
                 <Sparkles size={14} className="text-white" />
