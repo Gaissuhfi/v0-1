@@ -1,119 +1,141 @@
 "use client"
 
+import { useEffect, useRef } from "react"
 import { motion } from "framer-motion"
-import { Github, Twitter, Linkedin, Instagram, Mail, Phone, MapPin } from "lucide-react"
+import { Linkedin, Mail, MapPin } from "lucide-react"
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear()
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+
+  // 星空動畫
+  useEffect(() => {
+    const canvas = canvasRef.current
+    const ctx = canvas?.getContext("2d")
+    let animationFrameId: number
+
+    if (!canvas || !ctx) return
+
+    let stars: { x: number; y: number; r: number; alpha: number }[] = []
+    const numStars = 120
+
+    const init = () => {
+      stars = []
+      for (let i = 0; i < numStars; i++) {
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          r: Math.random() * 1.5 + 0.5,
+          alpha: Math.random(),
+        })
+      }
+    }
+
+    const animate = () => {
+      if (!ctx || !canvas) return
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      for (let star of stars) {
+        ctx.beginPath()
+        ctx.arc(star.x, star.y, star.r, 0, 2 * Math.PI)
+        ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`
+        ctx.fill()
+        star.alpha += (Math.random() - 0.5) * 0.05
+        star.alpha = Math.max(0.1, Math.min(1, star.alpha))
+      }
+      animationFrameId = requestAnimationFrame(animate)
+    }
+
+    const handleResize = () => {
+      canvas.width = window.innerWidth
+      canvas.height = 400
+      init()
+    }
+
+    window.addEventListener("resize", handleResize)
+    handleResize()
+    animate()
+
+    return () => {
+      cancelAnimationFrame(animationFrameId)
+      window.removeEventListener("resize", handleResize)
+    }
+  }, [])
 
   return (
-    <footer className="py-8 relative bg-gradient-to-b from-[#0b1020] via-[#12182b] to-[#0b1020] text-white">
-      <div className="container mx-auto px-4">
-        <div className="glass p-8 rounded-2xl backdrop-blur-md bg-white/5 shadow-lg">
+    <motion.footer className="relative z-10">
+      {/* 星空 Canvas 背景 */}
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 w-full h-[400px] z-0"
+      />
+
+      <div className="relative container mx-auto px-4 py-16">
+        <motion.div className="glass p-10 rounded-2xl backdrop-blur-xl bg-card/70 text-white">
           <div className="grid md:grid-cols-3 gap-8">
-            {/* 個人資訊區 */}
+            {/* 左側：個人資訊 */}
             <div>
-              <h3 className="text-2xl font-heading font-bold mb-4 text-gradient">Gaius Chen</h3>
-              <p className="text-gray-400 mb-4 max-w-xs">
-                Performance Marketing Specialist based in Taipei, passionate about automation & data.
+              <h3 className="text-2xl font-bold text-gradient mb-4">Gaius Chen</h3>
+              <p className="text-gray-300 mb-4 max-w-xs">
+                Performance Marketing Specialist with a focus on Paid Media, Analytics, and Automation.
               </p>
               <div className="flex space-x-4">
-                <motion.a
-                  href="https://github.com/"
-                  whileHover={{ y: -5 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="p-2 rounded-full bg-card/50 hover:bg-card transition-colors"
-                  aria-label="GitHub"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Github size={20} />
-                </motion.a>
-                <motion.a
-                  href="https://twitter.com/"
-                  whileHover={{ y: -5 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="p-2 rounded-full bg-card/50 hover:bg-card transition-colors"
-                  aria-label="Twitter"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Twitter size={20} />
-                </motion.a>
-                <motion.a
+                <a
                   href="https://www.linkedin.com/in/gaiuschen"
-                  whileHover={{ y: -5 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="p-2 rounded-full bg-card/50 hover:bg-card transition-colors"
-                  aria-label="LinkedIn"
                   target="_blank"
-                  rel="noopener noreferrer"
+                  className="p-2 bg-white/10 rounded-full hover:bg-white/20 transition"
                 >
                   <Linkedin size={20} />
-                </motion.a>
-                <motion.a
-                  href="https://instagram.com/"
-                  whileHover={{ y: -5 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="p-2 rounded-full bg-card/50 hover:bg-card transition-colors"
-                  aria-label="Instagram"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                </a>
+                <a
+                  href="mailto:bobo218079@gmail.com"
+                  className="p-2 bg-white/10 rounded-full hover:bg-white/20 transition"
                 >
-                  <Instagram size={20} />
-                </motion.a>
+                  <Mail size={20} />
+                </a>
+                <a
+                  href="https://www.google.com/maps/place/New+Taipei+City"
+                  target="_blank"
+                  className="p-2 bg-white/10 rounded-full hover:bg-white/20 transition"
+                >
+                  <MapPin size={20} />
+                </a>
               </div>
             </div>
 
-            {/* 快速導覽區 */}
+            {/* 快速連結（去除 skills） */}
             <div>
               <h3 className="text-lg font-bold mb-4">Quick Links</h3>
-              <ul className="space-y-2">
-                <li><a href="#home" className="text-gray-400 hover:text-white">Home</a></li>
-                <li><a href="#about" className="text-gray-400 hover:text-white">About</a></li>
-                <li><a href="#projects" className="text-gray-400 hover:text-white">Projects</a></li>
-                <li><a href="#experience" className="text-gray-400 hover:text-white">Experience</a></li>
-                <li>
-                  <a href="mailto:bobo218079@gmail.com" className="text-gray-400 hover:text-white">
-                    Contact
-                  </a>
-                </li>
+              <ul className="space-y-2 text-gray-300">
+                {["home", "about", "projects", "experience", "contact"].map((name) => (
+                  <li key={name}>
+                    <a
+                      href={`#${name}`}
+                      className="hover:text-white capitalize transition"
+                    >
+                      {name}
+                    </a>
+                  </li>
+                ))}
               </ul>
             </div>
 
-            {/* 聯絡資訊區 */}
+            {/* 技能描述 */}
             <div>
-              <h3 className="text-lg font-bold mb-4">Contact Info</h3>
-              <ul className="space-y-2 text-gray-400">
-                <li className="flex items-center space-x-2">
-                  <Mail size={16} />
-                  <a href="mailto:bobo218079@gmail.com" className="hover:text-white">bobo218079@gmail.com</a>
-                </li>
-                <li className="flex items-center space-x-2">
-                  <Phone size={16} />
-                  <a href="tel:+886903024283" className="hover:text-white">+886-903-024-283</a>
-                </li>
-                <li className="flex items-center space-x-2">
-                  <MapPin size={16} />
-                  <a
-                    href="https://www.google.com/maps/place/New+Taipei+City"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-white"
-                  >
-                    New Taipei City, Taiwan
-                  </a>
-                </li>
+              <h3 className="text-lg font-bold mb-4">Expertise</h3>
+              <ul className="space-y-2 text-gray-300">
+                <li>Google / Meta / ASA Ads</li>
+                <li>GA4 / Looker Studio</li>
+                <li>AppsFlyer / Attribution</li>
+                <li>Performance Strategy</li>
+                <li>Marketing Automation</li>
               </ul>
             </div>
           </div>
 
-          {/* 底部版權 */}
-          <div className="mt-8 pt-8 border-t border-gray-800 text-center text-gray-500 text-sm">
-            <p>&copy; {currentYear} Gaius Chen. All rights reserved.</p>
+          <div className="mt-8 pt-8 border-t border-gray-700 text-center text-sm text-gray-400">
+            &copy; {new Date().getFullYear()} Gaius Chen. All rights reserved.
           </div>
-        </div>
+        </motion.div>
       </div>
-    </footer>
+    </motion.footer>
   )
 }
