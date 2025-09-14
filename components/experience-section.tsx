@@ -6,44 +6,44 @@ import anime from "animejs"
 
 const experiences = [
   {
-    company: "TechInnovate AI",
-    position: "Lead AI Automation Engineer",
-    period: "2021 - Present",
+    company: "Chailease Holding",
+    position: "Performance Marketing Specialist",
+    period: "2023 - Present",
     description:
-      "Leading the development of AI-powered automation solutions for enterprise clients, resulting in 40% increase in operational efficiency.",
+      "Managed and optimized multi-channel digital advertising campaigns (Google, Meta, ASA) for financial services and fintech products.",
     achievements: [
-      "Developed a custom NLP pipeline that improved text classification accuracy by 35%",
-      "Led a team of 5 engineers to deliver 12 successful client projects",
-      "Implemented CI/CD pipelines that reduced deployment time by 60%",
+      "Reduced cost-per-lead (CPL) by 30% through campaign restructuring and audience testing",
+      "Migrated brand campaigns from agency to in-house with measurable KPI uplift",
+      "Developed GA4 + Looker Studio dashboards to automate reporting and reduce manual workload"
     ],
-    technologies: ["Python", "TensorFlow", "Docker", "AWS", "React"],
+    technologies: ["Google Ads", "Meta Ads", "ASA", "GA4", "Looker Studio", "Apps Script"]
   },
   {
-    company: "DataSphere Solutions",
-    position: "Senior AI Developer",
-    period: "2018 - 2021",
+    company: "AnyMind Group",
+    position: "Performance Marketing Executive",
+    period: "2022 - 2023",
     description:
-      "Designed and implemented machine learning models for predictive analytics and natural language processing applications.",
+      "Led user acquisition campaigns for e-commerce, app install, and influencer commerce clients across Asia.",
     achievements: [
-      "Created a recommendation engine that increased user engagement by 28%",
-      "Optimized data processing pipelines, reducing computation costs by 45%",
-      "Mentored junior developers and conducted technical workshops",
+      "Improved ROAS by 42% for a key retail client via advanced audience segmentation",
+      "Built customized conversion funnel analysis with Google Analytics & AppsFlyer",
+      "Operated cross-border campaigns in Japan, Taiwan, and SEA markets"
     ],
-    technologies: ["Python", "PyTorch", "SQL", "Kubernetes", "Vue.js"],
+    technologies: ["Google Ads", "Meta Ads", "AppsFlyer", "TikTok Ads", "Mixpanel", "Excel"]
   },
   {
-    company: "AutomateX",
-    position: "Automation Specialist",
-    period: "2016 - 2018",
+    company: "All9fun Inc.",
+    position: "Digital Advertising Strategist",
+    period: "2020 - 2022",
     description:
-      "Developed workflow automation systems that reduced manual processes by 60% and improved data accuracy.",
+      "Oversaw paid advertising and conversion tracking for gaming and entertainment verticals.",
     achievements: [
-      "Built custom RPA solutions for finance and HR departments",
-      "Integrated legacy systems with modern APIs, saving 20+ hours of manual work weekly",
-      "Implemented data validation frameworks that reduced errors by 75%",
+      "Lowered CPF by 50% through creative A/B testing and funnel optimization",
+      "Built full-funnel reporting from ad to in-app events with AppsFlyer & Firebase",
+      "Scaled campaigns across Google UAC and Meta with daily budgets exceeding NT$200k"
     ],
-    technologies: ["JavaScript", "Node.js", "MongoDB", "RPA", "REST APIs"],
-  },
+    technologies: ["UAC", "Firebase", "Meta Ads", "Google Sheets", "ASO", "Tableau"]
+  }
 ]
 
 export default function ExperienceSection() {
@@ -71,9 +71,7 @@ export default function ExperienceSection() {
           easing: "easeOutExpo",
           duration: 800,
           delay: anime.stagger(300),
-          // Added complete callback to ensure final state
           complete: function() {
-            // Set final state to ensure visibility
             const elements = timelineRef.current?.querySelectorAll(".timeline-dot");
             if (elements) {
               elements.forEach(el => {
@@ -91,9 +89,7 @@ export default function ExperienceSection() {
           easing: "easeOutExpo",
           duration: 1200,
           delay: 300,
-          // Added complete callback to ensure final state
           complete: function() {
-            // Set final state to ensure visibility
             const elements = timelineRef.current?.querySelectorAll(".timeline-line");
             if (elements) {
               elements.forEach(el => {
@@ -111,9 +107,7 @@ export default function ExperienceSection() {
           easing: "easeOutExpo",
           duration: 800,
           delay: anime.stagger(300),
-          // Added complete callback to ensure final state
           complete: function() {
-            // Set final state to ensure visibility
             const elements = timelineRef.current?.querySelectorAll(".experience-card");
             if (elements) {
               elements.forEach(el => {
@@ -161,13 +155,13 @@ export default function ExperienceSection() {
           animate={controls}
           variants={containerVariants}
           className="text-center mb-16"
-          style={{ opacity: 1 }} // Fallback opacity
+          style={{ opacity: 1 }}
         >
           <motion.h2 variants={itemVariants} className="text-3xl md:text-4xl font-heading font-bold mb-4">
             Work <span className="text-gradient">Experience</span>
           </motion.h2>
           <motion.p variants={itemVariants} className="text-gray-300 max-w-2xl mx-auto">
-            My professional journey in AI and automation
+            My professional journey in paid media and digital performance marketing.
           </motion.p>
           <motion.div
             variants={itemVariants}
@@ -177,39 +171,21 @@ export default function ExperienceSection() {
 
         <div className="max-w-5xl mx-auto" ref={timelineRef}>
           <div className="relative">
-            {/* Timeline line */}
             <div className="absolute left-0 md:left-1/2 top-0 h-full w-px bg-gradient-to-b from-primary via-secondary to-accent transform md:-translate-x-1/2 timeline-line origin-top"></div>
-
-            {/* Experience items */}
             {experiences.map((exp, index) => (
               <div
                 key={exp.company}
-                className={`relative mb-12 md:mb-24 ${
-                  index % 2 === 0 ? "md:pr-12 md:text-right md:ml-0 ml-12" : "md:pl-12 ml-12 md:ml-auto"
-                }`}
-                style={{
-                  width: "100%",
-                  maxWidth: "45%",
-                  opacity: 1, // Fallback opacity
-                }}
+                className={`relative mb-12 md:mb-24 ${index % 2 === 0 ? "md:pr-12 md:text-right md:ml-0 ml-12" : "md:pl-12 ml-12 md:ml-auto"}`}
+                style={{ width: "100%", maxWidth: "45%", opacity: 1 }}
               >
-                {/* Timeline dot */}
                 <div
-                  className={`absolute top-0 ${
-                    index % 2 === 0 ? "left-0 md:right-0 md:left-auto" : "left-0"
-                  } w-4 h-4 rounded-full bg-primary transform translate-x-[-8px] md:translate-x-[-50%] timeline-dot z-10`}
-                  style={{ opacity: 1 }} // Fallback opacity
+                  className={`absolute top-0 ${index % 2 === 0 ? "left-0 md:right-0 md:left-auto" : "left-0"} w-4 h-4 rounded-full bg-primary transform translate-x-[-8px] md:translate-x-[-50%] timeline-dot z-10`}
+                  style={{ opacity: 1 }}
                 ></div>
-
-                {/* Content */}
                 <motion.div
                   className="glass p-6 md:p-8 experience-card"
-                  whileHover={{
-                    y: -5,
-                    boxShadow: "0 10px 25px rgba(0, 0, 0, 0.2)",
-                    transition: { duration: 0.2 },
-                  }}
-                  style={{ opacity: 1 }} // Fallback opacity
+                  whileHover={{ y: -5, boxShadow: "0 10px 25px rgba(0, 0, 0, 0.2)", transition: { duration: 0.2 } }}
+                  style={{ opacity: 1 }}
                 >
                   <span className="inline-block px-3 py-1 text-xs rounded-full bg-primary/20 text-primary mb-4">
                     {exp.period}
@@ -217,8 +193,6 @@ export default function ExperienceSection() {
                   <h3 className="text-xl md:text-2xl font-heading font-bold mb-2">{exp.position}</h3>
                   <h4 className="text-lg text-gray-300 mb-4">{exp.company}</h4>
                   <p className="text-gray-400 mb-4">{exp.description}</p>
-
-                  {/* Key achievements */}
                   <div className="mt-4 pt-4 border-t border-white/10">
                     <h5 className="text-sm font-medium mb-2 text-secondary">Key Achievements</h5>
                     <ul className="space-y-2">
@@ -230,8 +204,6 @@ export default function ExperienceSection() {
                       ))}
                     </ul>
                   </div>
-
-                  {/* Technologies */}
                   <div className="mt-4 flex flex-wrap gap-2">
                     {exp.technologies.map((tech, idx) => (
                       <span key={idx} className="px-2 py-0.5 text-xs rounded-full bg-card/50 text-gray-300">
@@ -245,12 +217,11 @@ export default function ExperienceSection() {
           </div>
         </div>
 
-        {/* Resume download button */}
         <motion.div
           className="mt-16 text-center"
           initial={{ opacity: 1 }}
           animate={{ opacity: 1 }}
-          style={{ opacity: 1 }} // Fallback opacity
+          style={{ opacity: 1 }}
         >
           <motion.a
             href="#"
