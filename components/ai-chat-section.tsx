@@ -11,199 +11,129 @@ import Image from "next/image"
 const initialMessages = [
   {
     role: "assistant",
-    content: "👋 Hi there! I'm AI Ibro, your virtual assistant. Ask me about Ibrahim's work experience or skills!",
+    content: "👋 Hi there! I'm AI Bro, your virtual assistant. Ask me about Gaius's work experience, skills, or projects!",
   },
 ]
 
 const experienceResponses = [
   {
     role: "assistant",
-    content: `Ibrahim has over 7 years of experience in AI and automation:
+    content: `Gaius has over 4 years of experience in performance marketing and digital advertising:
 
-**Lead AI Engineer** at TechInnovate (2021-Present)
-• Developed custom NLP solutions for enterprise clients
-• Led a team of 5 engineers across 12 successful projects
-• Increased operational efficiency by 40% through automation
+**Senior Digital Marketing Specialist** — Chailease Holding (2024–Present)  
+• Lead in-house acquisition strategy for financing and installment products  
+• Implemented analytics-driven optimization with GA4, Tableau, Looker Studio, AppsFlyer, Mixpanel  
+• Shifted from agency to in-house buying, cutting costs significantly  
+• Managed monthly ad budgets over NT$2M (~CAD $80K)  
+• Achieved CPL ↓30%, CPF ↓50%, CPI ↓35%  
 
-**Senior AI Developer** at DataSphere (2018-2021)
-• Created recommendation engines with 28% higher engagement
-• Optimized data processing pipelines, reducing costs by 45%
-• Mentored junior developers and conducted workshops`,
+**Account Strategy (Performance Marketing Focus)** — AnyMind Group (2023–2024)  
+• Planned and executed paid campaigns across APAC (Taiwan, Vietnam, Japan, Singapore)  
+• Optimized ROAS and demand generation for diverse industries  
+• Managed NT$1–2M monthly budgets, reporting directly to Country Manager  
+• Supported e-commerce brand initiatives with >12% margin growth  
+
+**Paid Media Specialist** — All9fun Inc. (2021–2023)  
+• Managed UA campaigns for gaming & app products across Google, Meta, ASA, TikTok, AppLovin, Reddit  
+• Reduced costs by 50% while maintaining conversion quality  
+• Built IAP-event visualization to improve attribution accuracy  
+• Negotiated and launched Reddit Ads campaigns, first in company history`,
   },
 ]
 
 const skillsResponses = [
   {
     role: "assistant",
-    content: `Ibrahim specializes in:
+    content: `Gaius specializes in:
 
-**AI Development** - Building intelligent systems with ML/DL
-**Process Automation** - Creating efficient workflows
-**Data Analysis** - Extracting actionable insights
-**Voice AI** - Developing natural voice interfaces
-**Chatbot Development** - Creating conversational experiences
-
-He's proficient with tools like N8N, Airtable, GPT, Gemini, ElevenLabs, and various cloud platforms.`,
+**Paid Media Strategy** - Google Ads, Meta Ads, TikTok Ads, Apple Search Ads  
+**Analytics & Attribution** - GA4, Looker Studio, AppsFlyer, Mixpanel, Tableau  
+**Campaign Automation** - Reporting automation with Apps Script / Looker Studio connectors  
+**AI Marketing** - Applying AI tools for creative optimization, campaign analysis, and workflow automation  
+**Languages** - English (Fluent), Chinese (Native), Taiwanese (Conversational)`,
   },
 ]
 
 const projectResponses = [
   {
     role: "assistant",
-    content: `Ibrahim has built several innovative projects:
+    content: `Some highlighted projects include:
 
-**TaskFlow** - Productivity app with gamification
-**OneSoft** - All-in-one business platform
-**HabitFlow** - Wellness and habit tracking app
-**Film Fan Finder** - AI movie recommendation system
-**AI Automation Consultant** - Intelligent workflow automation
-
-Each project demonstrates his expertise in creating user-friendly, AI-powered solutions.`,
+**In-house Marketing Migration** — Built reporting infra + dashboards, transitioned from agency to in-house, cutting costs while scaling volume  
+**Cross-border eCommerce Launches** — Supported APAC campaigns (Shopee, etc.), driving localized performance uplift  
+**Gaming/App UA Growth** — Hit CPI goals across Tier 1/SEA markets through creative iteration & budget control  
+**Automation Workflows** — Created ad ops automation scripts (daily reporting, budget alerts), reducing manual effort significantly`,
   },
 ]
 
-const aiDevelopmentResponses = [
+// Extended services
+const aiMarketingResponses = [
   {
     role: "assistant",
-    content: `Excellent choice! Ibrahim's AI development services include:
+    content: `Excellent choice! Gaius's AI Marketing services include:
 
-**Machine Learning Models** - Custom ML solutions for your specific needs
-**Neural Networks** - Deep learning implementations for complex problems
-**Computer Vision** - Image and video analysis capabilities
-**Natural Language Processing** - Text analysis and language understanding
-**Predictive Analytics** - Forecasting and trend analysis systems
+**Creative Optimization** - Using AI to test and analyze ad creatives faster  
+**Campaign Insights** - Automating analysis with AI-driven dashboards  
+**Audience Targeting** - Leveraging AI to identify high-value cohorts  
+**Workflow Automation** - Reducing repetitive tasks with AI-assisted processes  
 
-**Technologies Used:**
-• Python, TensorFlow, PyTorch
-• OpenAI GPT, Google Gemini
-• AWS SageMaker, Azure ML
-• Custom model training and deployment
+**Technologies Used:**  
+• Looker Studio, GA4, AppsFlyer  
+• Google Ads Scripts / Apps Script automation  
+• AI-powered creative testing & reporting  
 
-Would you like to discuss a specific AI project for your business?`,
+Would you like to discuss how AI can enhance your marketing campaigns?`,
   },
 ]
 
 const processAutomationResponses = [
   {
     role: "assistant",
-    content: `Perfect! Ibrahim's process automation solutions cover:
+    content: `Perfect! Gaius's process automation work covers:
 
-**RPA Implementation** - Robotic Process Automation for repetitive tasks
-**Workflow Optimization** - Streamlined business processes
-**API Integration** - Connecting different systems seamlessly
-**Task Automation** - Automated scheduling and execution
-**Business Intelligence** - Automated reporting and analytics
+**Ad Ops Automation** - Daily budget pacing, alerts, reporting  
+**Workflow Optimization** - Streamlined campaign management  
+**API / Connector Use** - Apps Script + Looker Studio integrations  
+**Task Automation** - Automated scheduling and reporting updates  
 
-**Tools & Platforms:**
-• N8N for workflow automation
-• Zapier and Make.com integrations
-• Custom Python automation scripts
-• Cloud-based automation solutions
-
-What specific processes are you looking to automate?`,
+These automations reduced manual reporting time by 70% and improved decision-making speed.`,
   },
 ]
 
 const dataAnalyticsResponses = [
   {
     role: "assistant",
-    content: `Great choice! Ibrahim's data analytics services include:
+    content: `Gaius's analytics expertise includes:
 
-**Predictive Analytics** - Forecasting future trends and outcomes
-**Data Visualization** - Interactive dashboards and reports
-**Business Intelligence** - Strategic insights from your data
-**Performance Metrics** - KPI tracking and optimization
-**Real-time Analytics** - Live data processing and monitoring
+**Campaign Performance Dashboards** - Unified multi-channel reporting (Google, Meta, TikTok, ASA)  
+**Attribution Analysis** - AppsFlyer, Mixpanel for cross-device tracking  
+**KPI Tracking** - CPL, CPF, CPI, LTV monitoring  
+**Real-time Insights** - Looker Studio dashboards for stakeholders  
 
-**Technologies:**
-• Python (Pandas, NumPy, Scikit-learn)
-• Tableau, Power BI for visualization
-• SQL databases and data warehouses
-• Apache Spark for big data processing
-
-What kind of data insights are you looking to gain?`,
+Focused on actionable insights to improve marketing ROI.`,
   },
 ]
 
 const chatbotResponses = [
   {
     role: "assistant",
-    content: `Great choice! Ibrahim's chatbot development services include:
+    content: `Gaius has applied chatbot-style automation in marketing contexts:
 
-**Natural Language Processing** - Advanced NLP for human-like conversations
-**Multi-platform Integration** - Deploy across web, mobile, and messaging platforms
-**Voice Integration** - Voice-enabled chatbots with speech recognition
-**Custom Training** - Tailored to your business knowledge and tone
-**Analytics Dashboard** - Track conversations and optimize performance
+**Lead Qualification Bots** - Automated flows to pre-screen prospects  
+**FAQ Automation** - Reducing repetitive service questions  
+**Integration** - With CRM and campaign data  
 
-**Features:**
-• 24/7 customer support automation
-• Lead generation and qualification
-• FAQ automation and knowledge base
-• Integration with CRM and business systems
-
-Would you like to discuss a specific chatbot project for your business?`,
-  },
-]
-
-const customSoftwareResponses = [
-  {
-    role: "assistant",
-    content: `Excellent! Ibrahim's custom software development services include:
-
-**Full-stack Development** - Complete web and mobile applications
-**API Development** - RESTful and GraphQL API creation
-**System Integration** - Connecting existing systems and platforms
-**Cloud Solutions** - Scalable cloud-native applications
-**Database Design** - Efficient data architecture and management
-
-**Technologies:**
-• Frontend: React, Next.js, Vue.js, Flutter
-• Backend: Node.js, Python, PostgreSQL, MongoDB
-• Cloud: AWS, Azure, Google Cloud Platform
-• DevOps: Docker, Kubernetes, CI/CD pipelines
-
-What type of custom software solution are you looking to build?`,
-  },
-]
-
-const dataManagementResponses = [
-  {
-    role: "assistant",
-    content: `Excellent! Ibrahim's data management solutions cover:
-
-**Database Architecture** - Scalable and efficient database design
-**Data Pipeline Automation** - Streamlined data processing workflows
-**Real-time Analytics** - Live data processing and insights
-**Data Security** - Enterprise-grade security and compliance
-**Cloud Integration** - AWS, Azure, and GCP data solutions
-**Migration Services** - Seamless data migration and modernization
-
-**Capabilities:**
-• ETL/ELT pipeline development
-• Data warehouse design and optimization
-• Real-time streaming data processing
-• Data governance and quality assurance
-
-What specific data challenges are you looking to solve?`,
+These solutions help improve conversion while reducing workload.`,
   },
 ]
 
 // Rich text formatting function
 const formatMessage = (content: string) => {
-  // Convert **text** to bold
   let formatted = content.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
-
-  // Convert bullet points to proper list items
   formatted = formatted.replace(/^• (.+)$/gm, "<li>$1</li>")
-
-  // Wrap consecutive list items in ul tags
   formatted = formatted.replace(/(<li>.*<\/li>\s*)+/gs, "<ul>$&</ul>")
-
-  // Convert line breaks to proper spacing
   formatted = formatted.replace(/\n\n/g, "<br><br>")
   formatted = formatted.replace(/\n/g, "<br>")
-
   return formatted
 }
 
@@ -231,53 +161,7 @@ export default function AIChatSection() {
     scrollToBottom()
   }, [messages])
 
-  // Listen for service click events
-  useEffect(() => {
-    const handleServiceMessage = (event: any) => {
-      const { message } = event.detail
-      if (message) {
-        // Add user message
-        const userMessage = { role: "user", content: message }
-        setMessages((prev) => [...prev, userMessage])
-        setIsTyping(true)
-
-        // Simulate AI response
-        setTimeout(() => {
-          let response
-          const lowercaseMessage = message.toLowerCase()
-
-          if (lowercaseMessage.includes("ai development")) {
-            response = aiDevelopmentResponses[0]
-          } else if (lowercaseMessage.includes("process automation")) {
-            response = processAutomationResponses[0]
-          } else if (lowercaseMessage.includes("data analytics")) {
-            response = dataAnalyticsResponses[0]
-          } else if (lowercaseMessage.includes("chatbot")) {
-            response = chatbotResponses[0]
-          } else if (lowercaseMessage.includes("custom software")) {
-            response = customSoftwareResponses[0]
-          } else if (lowercaseMessage.includes("data management")) {
-            response = dataManagementResponses[0]
-          } else {
-            response = {
-              role: "assistant",
-              content:
-                "Thank you for your interest! I'd be happy to discuss this service with you. What specific requirements do you have?",
-            }
-          }
-
-          setMessages((prev) => [...prev, response])
-          setIsTyping(false)
-        }, 1500)
-      }
-    }
-
-    window.addEventListener("triggerChatMessage", handleServiceMessage)
-    return () => window.removeEventListener("triggerChatMessage", handleServiceMessage)
-  }, [])
-
   const scrollToBottom = () => {
-    // Only scroll within the chat container, not the entire page
     if (chatMessagesRef.current) {
       chatMessagesRef.current.scrollTop = chatMessagesRef.current.scrollHeight
     }
@@ -285,53 +169,40 @@ export default function AIChatSection() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    e.stopPropagation()
-
     if (!input.trim()) return
 
-    // Add user message
     const userMessage = { role: "user", content: input }
     setMessages((prev) => [...prev, userMessage])
     setInput("")
     setIsTyping(true)
 
-    // Focus back on input after submission
     setTimeout(() => {
       inputRef.current?.focus()
     }, 100)
 
-    // Simulate AI response
     setTimeout(() => {
       let response
       const lowercaseInput = input.toLowerCase()
 
-      if (lowercaseInput.includes("experience") || lowercaseInput.includes("work") || lowercaseInput.includes("job")) {
+      if (lowercaseInput.includes("experience") || lowercaseInput.includes("work")) {
         response = experienceResponses[0]
-      } else if (lowercaseInput.includes("skill") || lowercaseInput.includes("know") || lowercaseInput.includes("do")) {
+      } else if (lowercaseInput.includes("skill")) {
         response = skillsResponses[0]
-      } else if (
-        lowercaseInput.includes("project") ||
-        lowercaseInput.includes("portfolio") ||
-        lowercaseInput.includes("build")
-      ) {
+      } else if (lowercaseInput.includes("project")) {
         response = projectResponses[0]
-      } else if (lowercaseInput.includes("ai development") || lowercaseInput.includes("machine learning")) {
-        response = aiDevelopmentResponses[0]
-      } else if (lowercaseInput.includes("process automation") || lowercaseInput.includes("workflow")) {
+      } else if (lowercaseInput.includes("ai marketing")) {
+        response = aiMarketingResponses[0]
+      } else if (lowercaseInput.includes("automation")) {
         response = processAutomationResponses[0]
-      } else if (lowercaseInput.includes("data analytics") || lowercaseInput.includes("analytics")) {
+      } else if (lowercaseInput.includes("analytics")) {
         response = dataAnalyticsResponses[0]
       } else if (lowercaseInput.includes("chatbot")) {
         response = chatbotResponses[0]
-      } else if (lowercaseInput.includes("custom software") || lowercaseInput.includes("software development")) {
-        response = customSoftwareResponses[0]
-      } else if (lowercaseInput.includes("data management") || lowercaseInput.includes("database")) {
-        response = dataManagementResponses[0]
       } else {
         response = {
           role: "assistant",
           content:
-            "I can tell you about Ibrahim's work experience, skills, projects, or specific services like AI development, process automation, data analytics, chatbot development, custom software, and data management. What would you like to know?",
+            "I can tell you about Gaius's work experience, skills, projects, or extended services like AI Marketing, process automation, data analytics, and chatbot automation. What would you like to know?",
         }
       }
 
@@ -341,15 +212,12 @@ export default function AIChatSection() {
   }
 
   const handleQuickQuestion = (question: string) => {
-    // Simulate user clicking a quick question
     const userMessage = { role: "user", content: question }
     setMessages((prev) => [...prev, userMessage])
     setIsTyping(true)
 
-    // Simulate AI response
     setTimeout(() => {
       let response
-
       if (question.includes("experience")) {
         response = experienceResponses[0]
       } else if (question.includes("skills")) {
@@ -357,10 +225,7 @@ export default function AIChatSection() {
       } else if (question.includes("projects")) {
         response = projectResponses[0]
       }
-
-      if (response) {
-        setMessages((prev) => [...prev, response])
-      }
+      if (response) setMessages((prev) => [...prev, response])
       setIsTyping(false)
     }, 1500)
   }
@@ -371,40 +236,21 @@ export default function AIChatSection() {
 
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.1,
-      },
-    },
+    visible: { opacity: 1, transition: { staggerChildren: 0.15, delayChildren: 0.1 } },
   }
 
   const itemVariants = {
     hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: { duration: 0.6, ease: "easeOut" },
-    },
+    visible: { y: 0, opacity: 1, transition: { duration: 0.6, ease: "easeOut" } },
   }
 
   const chatElementVariants = {
     hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: { duration: 0.8, ease: "easeOut" },
-    },
+    visible: { y: 0, opacity: 1, transition: { duration: 0.8, ease: "easeOut" } },
   }
 
   return (
     <section id="experience" className="py-20 md:py-32 relative bg-gradient-to-b from-card/50 to-background">
-      <div className="absolute inset-0 z-0 overflow-hidden">
-        <div className="absolute top-1/3 right-1/4 w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/3 left-1/4 w-64 h-64 bg-secondary/5 rounded-full blur-3xl"></div>
-      </div>
-
       <div className="container mx-auto px-4">
         <motion.div
           ref={ref}
@@ -412,13 +258,12 @@ export default function AIChatSection() {
           animate={controls}
           variants={containerVariants}
           className="text-center mb-12"
-          style={{ opacity: 1 }}
         >
           <motion.h2 variants={itemVariants} className="text-3xl md:text-4xl font-heading font-bold mb-4">
             Chat with <span className="text-gradient">AI Ibro</span>
           </motion.h2>
           <motion.p variants={itemVariants} className="text-gray-300 max-w-2xl mx-auto">
-            Ask about my work experience, skills, projects, or specific services
+            Ask about my work experience, skills, projects, or extended marketing services
           </motion.p>
           <motion.div
             variants={itemVariants}
@@ -444,29 +289,19 @@ export default function AIChatSection() {
                   <p className="text-xs text-gray-400">Virtual Assistant</p>
                 </div>
               </div>
-              <button
-                onClick={resetChat}
-                className="p-2 rounded-full hover:bg-white/10 transition-colors"
-                title="Reset chat"
-                type="button"
-              >
+              <button onClick={resetChat} className="p-2 rounded-full hover:bg-white/10" type="button">
                 <RefreshCw size={16} />
               </button>
             </div>
 
-            {/* Chat messages - Fixed height container with internal scrolling */}
-            <div
-              ref={chatMessagesRef}
-              className="h-[400px] overflow-y-auto p-4 space-y-4 scroll-smooth"
-              style={{ scrollBehavior: "smooth" }}
-            >
+            {/* Chat messages */}
+            <div ref={chatMessagesRef} className="h-[400px] overflow-y-auto p-4 space-y-4 scroll-smooth">
               {messages.map((message, index) => (
                 <motion.div
                   key={index}
                   className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3 }}
                 >
                   <div
                     className={`max-w-[80%] rounded-2xl p-3 ${
@@ -481,69 +316,38 @@ export default function AIChatSection() {
                       )}
                       <span className="text-xs font-medium">{message.role === "assistant" ? "AI Ibro" : "You"}</span>
                     </div>
-                    <div
-                      className="text-sm rich-text"
-                      dangerouslySetInnerHTML={{ __html: formatMessage(message.content) }}
-                    />
+                    <div className="text-sm rich-text" dangerouslySetInnerHTML={{ __html: formatMessage(message.content) }} />
                   </div>
                 </motion.div>
               ))}
 
               {isTyping && (
-                <motion.div
-                  className="flex justify-start"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3 }}
-                >
+                <motion.div className="flex justify-start" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
                   <div className="max-w-[80%] rounded-2xl p-3 bg-card/50 text-white">
                     <div className="flex items-center gap-2 mb-1">
                       <Bot size={16} className="text-primary" />
                       <span className="text-xs font-medium">AI Ibro</span>
                     </div>
                     <div className="flex gap-1">
-                      <span
-                        className="w-2 h-2 rounded-full bg-primary animate-bounce"
-                        style={{ animationDelay: "0ms" }}
-                      ></span>
-                      <span
-                        className="w-2 h-2 rounded-full bg-primary animate-bounce"
-                        style={{ animationDelay: "150ms" }}
-                      ></span>
-                      <span
-                        className="w-2 h-2 rounded-full bg-primary animate-bounce"
-                        style={{ animationDelay: "300ms" }}
-                      ></span>
+                      <span className="w-2 h-2 rounded-full bg-primary animate-bounce"></span>
+                      <span className="w-2 h-2 rounded-full bg-primary animate-bounce" style={{ animationDelay: "150ms" }}></span>
+                      <span className="w-2 h-2 rounded-full bg-primary animate-bounce" style={{ animationDelay: "300ms" }}></span>
                     </div>
                   </div>
                 </motion.div>
               )}
-
-              {/* Invisible element to scroll to */}
               <div ref={messagesEndRef} />
             </div>
 
             {/* Quick questions */}
-            <div className="p-3 border-t border-white/10 flex gap-2 overflow-x-auto hide-scrollbar">
-              <button
-                type="button"
-                onClick={() => handleQuickQuestion("Tell me about Ibrahim's work experience")}
-                className="px-3 py-1 text-xs rounded-full bg-card/50 border border-white/10 whitespace-nowrap hover:bg-primary/20 transition-colors"
-              >
+            <div className="p-3 border-t border-white/10 flex gap-2 overflow-x-auto">
+              <button type="button" onClick={() => handleQuickQuestion("Tell me about Gaius's work experience")} className="px-3 py-1 text-xs rounded-full bg-card/50 border border-white/10">
                 Work experience
               </button>
-              <button
-                type="button"
-                onClick={() => handleQuickQuestion("What are Ibrahim's skills?")}
-                className="px-3 py-1 text-xs rounded-full bg-card/50 border border-white/10 whitespace-nowrap hover:bg-primary/20 transition-colors"
-              >
+              <button type="button" onClick={() => handleQuickQuestion("What are Gaius's skills?")} className="px-3 py-1 text-xs rounded-full bg-card/50 border border-white/10">
                 Skills
               </button>
-              <button
-                type="button"
-                onClick={() => handleQuickQuestion("Tell me about Ibrahim's projects")}
-                className="px-3 py-1 text-xs rounded-full bg-card/50 border border-white/10 whitespace-nowrap hover:bg-primary/20 transition-colors"
-              >
+              <button type="button" onClick={() => handleQuickQuestion("Tell me about Gaius's projects")} className="px-3 py-1 text-xs rounded-full bg-card/50 border border-white/10">
                 Projects
               </button>
             </div>
@@ -557,36 +361,21 @@ export default function AIChatSection() {
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   placeholder="Ask about my experience, skills, or projects..."
-                  className="flex-1 bg-card/50 rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-primary/50"
+                  className="flex-1 bg-card/50 rounded-full px-4 py-2 text-sm"
                   autoComplete="off"
                 />
-                <button
-                  type="submit"
-                  className="p-2 rounded-full bg-gradient-to-r from-primary to-secondary hover:opacity-90 transition-opacity disabled:opacity-50"
-                  disabled={!input.trim()}
-                >
+                <button type="submit" className="p-2 rounded-full bg-gradient-to-r from-primary to-secondary" disabled={!input.trim()}>
                   <Send size={18} className="text-white" />
                 </button>
               </form>
             </div>
           </motion.div>
 
-          {/* AI Assistant image */}
-          <motion.div
-            className="mt-8 flex justify-center chat-element"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
+          {/* AI Assistant avatar */}
+          <motion.div className="mt-8 flex justify-center chat-element" initial={{ opacity: 0, scale: 0.8 }} animate={isInView ? { opacity: 1, scale: 1 } : {}}>
             <div className="relative">
-              <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-primary/30 glow-effect">
-                <Image
-                  src="/images/ibrahim-avatar.png"
-                  alt="Ibrahim Mustafa"
-                  width={96}
-                  height={96}
-                  className="w-full h-full object-cover"
-                />
+              <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-primary/30">
+                <Image src="/images/avatar.png" alt="Gaius Chen" width={96} height={96} className="w-full h-full object-cover" />
               </div>
               <div className="absolute -bottom-2 -right-2 w-8 h-8 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center">
                 <Sparkles size={14} className="text-white" />
