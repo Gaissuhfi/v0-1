@@ -15,7 +15,7 @@ export default function BlogSection() {
   }
 
   return (
-    <section id="blogs" className="relative py-20 px-4 overflow-hidden">
+    <section id="blog" className="relative py-20 px-4 overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-transparent to-cyan-900/20" />
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl" />
