@@ -23,12 +23,16 @@ export default function HeroSectionNew() {
     return () => window.removeEventListener("resize", handleResize)
   }, [])
 
-  // 桌機：0.8，手機：1.2
-  const fadePoint = isMobile ? 1.2 : 0.8
-
-  const opacity = useTransform(scrollYProgress, [0, fadePoint], [1, 0.3])
-  const scale = useTransform(scrollYProgress, [0, fadePoint], [1, 0.95])
-  const y = useTransform(scrollYProgress, [0, fadePoint], [0, 100])
+  // 桌機版正常淡出，手機版維持亮度
+  const opacity = isMobile
+    ? 1
+    : useTransform(scrollYProgress, [0, 0.8], [1, 0.3])
+  const scale = isMobile
+    ? 1
+    : useTransform(scrollYProgress, [0, 0.8], [1, 0.95])
+  const y = isMobile
+    ? 0
+    : useTransform(scrollYProgress, [0, 0.8], [0, 100])
 
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
 
