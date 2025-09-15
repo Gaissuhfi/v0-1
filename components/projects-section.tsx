@@ -74,19 +74,10 @@ export default function ProjectsSection() {
   const controls = useAnimation()
   const [activeIndex, setActiveIndex] = useState(0)
   const [isExpanded, setIsExpanded] = useState(false)
-  const [previewIndex, setPreviewIndex] = useState(0) // 新增 preview index
 
   useEffect(() => {
     controls.start("visible")
   }, [controls])
-
-  // 自動輪播 preview，每 5 秒切換
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setPreviewIndex((prev) => (prev + 4) % projects.length)
-    }, 5000)
-    return () => clearInterval(interval)
-  }, [])
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -206,50 +197,48 @@ export default function ProjectsSection() {
           </motion.div>
         </motion.div>
 
-        {/* Preview Cards (輪播顯示) */}
-        <motion.div
-          className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6"
-          initial="hidden"
-          animate="visible"
-          variants={containerVariants}
-        >
-          {projects.slice(previewIndex, previewIndex + 3).map((project, idx) => (
-            <motion.div
-              key={idx}
-              className="glass p-5 rounded-xl hover:bg-card/30 transition-all cursor-pointer project-card"
-              variants={cardVariants}
-              whileHover={{ y: -5, scale: 1.02 }}
-              onClick={() => setActiveIndex(projects.findIndex((p) => p.title === project.title))}
-            >
-              <div className="h-40 mb-4 overflow-hidden rounded-lg">
-                <Image
-                  src={project.image || "/placeholder.svg"}
-                  alt={project.title}
-                  width={400}
-                  height={300}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <h4 className="text-lg font-bold mb-2">{project.title}</h4>
-              <p className="text-sm text-gray-400 line-clamp-2 mb-3">{project.description}</p>
-              <div className="flex flex-wrap gap-1">
-                {project.tags.slice(0, 2).map((tag) => (
-                  <span
-                    key={tag}
-                    className="px-2 py-0.5 text-xs rounded-full bg-primary/10 border border-primary/20"
-                  >
-                    {tag}
-                  </span>
-                ))}
-                {project.tags.length > 2 && (
-                  <span className="px-2 py-0.5 text-xs rounded-full bg-gray-700">
-                    +{project.tags.length - 2}
-                  </span>
-                )}
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
+        {/* Preview Cards 跑馬燈效果 */}
+        <div className="mt-16 overflow-hidden">
+          <motion.div
+            className="flex gap-6"
+            initial={{ x: 0 }}
+            animate={{ x: ["0%", "-100%"] }}
+            transition={{ duration: 30, ease: "linear", repeat: Infinity }}
+          >
+            {[...projects, ...projects].map((project, idx) => (
+              <motion.div
+                key={idx}
+                className="glass p-5 rounded-xl min-w-[300px] hover:bg-card/30 transition-all cursor-pointer project-card"
+                whileHover={{ y: -5, scale: 1.02 }}
+                onClick={() => setActiveIndex(projects.findIndex((p) => p.title === project.title))}
+              >
+                <div className="h-40 mb-4 overflow-hidden rounded-lg">
+                  <Image
+                    src={project.image || "/placeholder.svg"}
+                    alt={project.title}
+                    width={400}
+                    height={300}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <h4 className="text-lg font-bold mb-2">{project.title}</h4>
+                <p className="text-sm text-gray-400 line-clamp-2 mb-3">{project.description}</p>
+                <div className="flex flex-wrap gap-1">
+                  {project.tags.slice(0, 2).map((tag) => (
+                    <span key={tag} className="px-2 py-0.5 text-xs rounded-full bg-primary/10 border border-primary/20">
+                      {tag}
+                    </span>
+                  ))}
+                  {project.tags.length > 2 && (
+                    <span className="px-2 py-0.5 text-xs rounded-full bg-gray-700">
+                      +{project.tags.length - 2}
+                    </span>
+                  )}
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
       </div>
     </section>
   )
