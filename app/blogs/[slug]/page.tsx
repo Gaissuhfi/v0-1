@@ -273,11 +273,11 @@ export default function BlogPost() {
               <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
                 Let’s discuss how AI, analytics, and brand building can take your marketing to the next level.
               </p>
-              <a href="#contact">
-                <Button className="bg-gradient-to-r from-purple-500 to-cyan-500 text-white">
-                  Start the Conversation <ArrowLeft className="w-4 h-4 ml-2" />
-                </Button>
-              </a>
+              <Link href="/#contact">
+              <Button className="bg-gradient-to-r from-purple-500 to-cyan-500 text-white">
+              Start the Conversation <ArrowLeft className="w-4 h-4 ml-2" />
+             </Button>
+             </Link>
             </CardContent>
           </Card>
         </motion.div>
