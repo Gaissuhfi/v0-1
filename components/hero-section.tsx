@@ -14,11 +14,19 @@ export default function HeroSection() {
     offset: ["start start", "end start"],
   })
 
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0.2])
-  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.9])
-  const y = useTransform(scrollYProgress, [0, 0.5], [0, 50])
-
   const { isMobile } = useResponsive()
+
+  // 桌機版延到 0.8 才淡出，手機版保持不淡出
+  const opacity = isMobile
+    ? 1
+    : useTransform(scrollYProgress, [0, 0.8], [1, 0.2])
+  const scale = isMobile
+    ? 1
+    : useTransform(scrollYProgress, [0, 0.8], [1, 0.9])
+  const y = isMobile
+    ? 0
+    : useTransform(scrollYProgress, [0, 0.8], [0, 50])
+
   const particlesRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
