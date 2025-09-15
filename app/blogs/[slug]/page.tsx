@@ -266,26 +266,22 @@ export default function BlogPost() {
         </Card>
 
        {/* Call to Action */}
-<motion.div
-  initial={{ opacity: 0, y: 30 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.8, delay: 0.2 }}
-  className="mt-12"
->
-  <Card className="bg-gradient-to-r from-purple-500/10 to-cyan-500/10 border border-purple-500/30">
-    <CardContent className="p-8 text-center">
-      <h3 className="text-2xl font-bold text-white mb-4">Ready to Talk Growth?</h3>
-      <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
-        Let’s discuss how AI, analytics, and brand building can take your marketing to the next level.
-      </p>
-      <Link href="mailto:bobo218079@gmail.com">
-        <Button className="bg-gradient-to-r from-purple-500 to-cyan-500 text-white">
-          Start the Conversation <ArrowLeft className="w-4 h-4 ml-2" />
-        </Button>
-      </Link>
-    </CardContent>
-  </Card>
-</motion.div>
+ <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.2 }} className="mt-12">
+          <Card className="bg-gradient-to-r from-purple-500/10 to-cyan-500/10 border border-purple-500/30">
+            <CardContent className="p-8 text-center">
+              <h3 className="text-2xl font-bold text-white mb-4">Ready to Talk Growth?</h3>
+              <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
+                Let’s discuss how AI, analytics, and brand building can take your marketing to the next level.
+              </p>
+              {/* 外部/特殊協定請用 <a>，不要用 next/link */}
+              <a href="mailto:bobo218079@gmail.com">
+                <Button className="bg-gradient-to-r from-purple-500 to-cyan-500 text-white">
+                  Start the Conversation <ArrowLeft className="w-4 h-4 ml-2" />
+                </Button>
+              </a>
+            </CardContent>
+          </Card>
+        </motion.div>
       </div>
     </div>
   )
