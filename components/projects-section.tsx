@@ -1,7 +1,7 @@
 "use client"
 
 import { useRef, useState, useEffect } from "react"
-import { motion, useInView, useAnimation, type PanInfo } from "framer-motion"
+import { motion, useInView, useAnimation } from "framer-motion"
 import { Target, ChevronLeft, ChevronRight } from "lucide-react"
 import Image from "next/image"
 
@@ -77,11 +77,6 @@ export default function ProjectsSection() {
   const nextProject = () => setActiveIndex((prev) => (prev + 1) % projects.length)
   const prevProject = () => setActiveIndex((prev) => (prev - 1 + projects.length) % projects.length)
 
-  const handleDragEnd = (_: any, info: PanInfo) => {
-    if (info.offset.x > 50) prevProject()
-    else if (info.offset.x < -50) nextProject()
-  }
-
   return (
     <section id="projects" className="py-20 md:py-32 relative">
       <div className="container mx-auto px-4 relative z-10">
@@ -102,10 +97,6 @@ export default function ProjectsSection() {
           initial="hidden"
           animate="visible"
           className="grid md:grid-cols-2 gap-8 items-center project-card"
-          drag="x"
-          dragConstraints={{ left: -100, right: 100 }}
-          dragElastic={0.2}
-          onDragEnd={handleDragEnd}
         >
           {/* Left Content */}
           <div>
@@ -182,8 +173,8 @@ export default function ProjectsSection() {
         <div className="mt-16 overflow-hidden">
           <motion.div
             className="flex gap-6"
-            animate={{ x: ["0%", "-100%"] }}
-            transition={{ repeat: Infinity, duration: 15, ease: "linear" }}
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
           >
             {[...projects, ...projects].map((project, idx) => (
               <div
