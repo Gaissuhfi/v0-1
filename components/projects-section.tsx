@@ -1,7 +1,7 @@
 "use client"
 
 import { useRef, useState, useEffect } from "react"
-import { motion, useInView, useAnimation } from "framer-motion"
+import { motion, useInView, useAnimation, type PanInfo } from "framer-motion"
 import { Target, ChevronLeft, ChevronRight } from "lucide-react"
 import Image from "next/image"
 
@@ -69,10 +69,26 @@ export default function ProjectsSection() {
   const controls = useAnimation()
   const [activeIndex, setActiveIndex] = useState(0)
   const [isExpanded, setIsExpanded] = useState(false)
+  const [duration, setDuration] = useState(15) // 預設桌機 15 秒
 
   useEffect(() => {
     controls.start("visible")
   }, [controls])
+
+  // 根據螢幕寬度計算 duration
+  useEffect(() => {
+    const updateDuration = () => {
+      const baseDuration = 15 // 桌機固定 15 秒
+      const desktopWidth = 1200 // 假設桌機寬度基準
+      const currentWidth = window.innerWidth
+      const ratio = currentWidth / desktopWidth
+      setDuration(baseDuration * ratio) // 手機會更快，保持等比
+    }
+
+    updateDuration()
+    window.addEventListener("resize", updateDuration)
+    return () => window.removeEventListener("resize", updateDuration)
+  }, [])
 
   const nextProject = () => setActiveIndex((prev) => (prev + 1) % projects.length)
   const prevProject = () => setActiveIndex((prev) => (prev - 1 + projects.length) % projects.length)
@@ -169,12 +185,13 @@ export default function ProjectsSection() {
           </motion.div>
         </motion.div>
 
-        {/* 下方 Preview Cards - 跑馬燈效果 */}
+        {/* 下方 Preview Cards - 無縫跑馬燈 */}
         <div className="mt-16 overflow-hidden">
           <motion.div
+            id="marquee"
             className="flex gap-6"
             animate={{ x: ["0%", "-50%"] }}
-            transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
+            transition={{ repeat: Infinity, duration: duration, ease: "linear" }}
           >
             {[...projects, ...projects].map((project, idx) => (
               <div
