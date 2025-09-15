@@ -2,7 +2,7 @@
 
 import { useRef, useState, useEffect } from "react"
 import { motion, useInView, useAnimation, type PanInfo } from "framer-motion"
-import { ExternalLink, Github, Target, ChevronLeft, ChevronRight } from "lucide-react"
+import { Target, ChevronLeft, ChevronRight } from "lucide-react"
 import Image from "next/image"
 
 const projects = [
@@ -14,7 +14,6 @@ const projects = [
       "At a leading Taiwanese financial enterprise, I spearheaded the shift from agency-managed to in-house ad operations across Meta, Google, and TikTok. Managed NT$2M+ monthly ad spend (~CAD $80K+) and delivered major efficiency gains: CPL ↓30%, CPF ↓50%, CPI ↓35%. These results built executive trust, enabling team expansion and faster scaling.",
     tags: ["Meta Ads", "Google Ads", "TikTok Ads", "AppsFlyer"],
     image: "/images/projects/finance-campaign.png",
-    links: { demo: "#", github: "#" },
     features: ["CPL -30%", "CPF -50%", "CPI -35%", "In-house Transition"],
     color: "from-yellow-400/20 to-red-500/20",
   },
@@ -26,7 +25,6 @@ const projects = [
       "At a cross-border advertising agency, I managed regional campaigns in Taiwan, Vietnam, Japan, and Singapore. By launching localized e-commerce initiatives and leading D2C growth projects, the Taiwan branch achieved Top 3 Shopee APAC ranking. Contributed >12% margin growth for in-house brand initiatives through tailored ad strategies.",
     tags: ["Shopee", "E-commerce", "APAC Strategy", "D2C"],
     image: "/images/projects/ecommerce-growth.png",
-    links: { demo: "#", github: "#" },
     features: ["Shopee Top-3 APAC", "Margin +12%", "Cross-border Ads", "Localized Strategies"],
     color: "from-orange-400/20 to-pink-500/20",
   },
@@ -38,7 +36,6 @@ const projects = [
       "At a mobile gaming startup, I ran campaigns across Google Ads, Meta Ads, TikTok Ads, AppLovin, and Reddit. Developed in-app event dashboards (IAP tracking) that improved attribution accuracy and actionable insights. Negotiated and executed Reddit Ads, pioneering platform adoption. Achieved 50% campaign cost reduction while maintaining conversion volume.",
     tags: ["Google Ads", "TikTok Ads", "Reddit Ads", "Attribution"],
     image: "/images/projects/mobile-app.png",
-    links: { demo: "#", github: "#" },
     features: ["50% Cost Reduction", "Reddit Ads Pilot", "IAP Event Dashboard", "Multi-channel"],
     color: "from-blue-500/20 to-cyan-500/20",
   },
@@ -50,7 +47,6 @@ const projects = [
       "As a fitness consultant at a global gym chain, I applied consultative sales and long-term engagement strategies. Increased membership sales by 80%, generating NT$500K+ annually. Sustained >90% retention rate by developing personalized coaching and relationship-building programs.",
     tags: ["Consultative Sales", "Client Retention", "B2C Growth"],
     image: "/images/projects/fitness.png",
-    links: { demo: "#", github: "#" },
     features: ["+80% Membership", "500K+ TWD Revenue", ">90% Retention", "Engagement Programs"],
     color: "from-green-400/20 to-emerald-500/20",
   },
@@ -62,7 +58,6 @@ const projects = [
       "Introduced Reddit Ads to a Taiwanese mobile app publisher, handling everything from vendor negotiation to execution. This pilot created a new channel for lead acquisition and app installs, later adopted by the wider marketing team as a scalable source of installs.",
     tags: ["Reddit Ads", "Innovation", "Vendor Negotiation"],
     image: "/images/projects/reddit-ads.png",
-    links: { demo: "#", github: "#" },
     features: ["Vendor Negotiation", "Channel Innovation", "App Installs", "Market First"],
     color: "from-purple-500/20 to-pink-500/20",
   },
@@ -79,19 +74,6 @@ export default function ProjectsSection() {
     controls.start("visible")
   }, [controls])
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.15, delayChildren: 0.1 } },
-  }
-  const cardVariants = {
-    hidden: { y: 30, opacity: 0 },
-    visible: { y: 0, opacity: 1, transition: { duration: 0.8, ease: "easeOut" } },
-  }
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
-  }
-
   const nextProject = () => setActiveIndex((prev) => (prev + 1) % projects.length)
   const prevProject = () => setActiveIndex((prev) => (prev - 1 + projects.length) % projects.length)
 
@@ -104,14 +86,14 @@ export default function ProjectsSection() {
     <section id="projects" className="py-20 md:py-32 relative">
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Title */}
-        <motion.div ref={ref} initial="hidden" animate={controls} variants={containerVariants} className="text-center mb-16">
-          <motion.h2 variants={itemVariants} className="text-3xl md:text-4xl font-heading font-bold mb-4">
+        <motion.div ref={ref} initial="hidden" animate={controls} className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">
             Featured <span className="text-gradient">Projects</span>
-          </motion.h2>
-          <motion.p variants={itemVariants} className="text-gray-300 max-w-2xl mx-auto">
+          </h2>
+          <p className="text-gray-300 max-w-2xl mx-auto">
             Case studies across fintech, e-commerce, and app marketing — delivering measurable growth and innovation.
-          </motion.p>
-          <motion.div variants={itemVariants} className="h-1 w-20 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto mt-4"></motion.div>
+          </p>
+          <div className="h-1 w-20 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto mt-4"></div>
         </motion.div>
 
         {/* Active Project Card */}
@@ -119,7 +101,6 @@ export default function ProjectsSection() {
           key={activeIndex}
           initial="hidden"
           animate="visible"
-          variants={cardVariants}
           className="grid md:grid-cols-2 gap-8 items-center project-card"
           drag="x"
           dragConstraints={{ left: -100, right: 100 }}
@@ -197,19 +178,17 @@ export default function ProjectsSection() {
           </motion.div>
         </motion.div>
 
-        {/* Preview Cards 跑馬燈效果 */}
+        {/* 下方 Preview Cards - 跑馬燈效果 */}
         <div className="mt-16 overflow-hidden">
           <motion.div
             className="flex gap-6"
-            initial={{ x: 0 }}
             animate={{ x: ["0%", "-100%"] }}
-            transition={{ duration: 30, ease: "linear", repeat: Infinity }}
+            transition={{ repeat: Infinity, duration: 40, ease: "linear" }}
           >
             {[...projects, ...projects].map((project, idx) => (
-              <motion.div
+              <div
                 key={idx}
-                className="glass p-5 rounded-xl min-w-[300px] hover:bg-card/30 transition-all cursor-pointer project-card"
-                whileHover={{ y: -5, scale: 1.02 }}
+                className="glass min-w-[300px] max-w-[300px] p-5 rounded-xl hover:bg-card/30 transition-all cursor-pointer project-card"
                 onClick={() => setActiveIndex(projects.findIndex((p) => p.title === project.title))}
               >
                 <div className="h-40 mb-4 overflow-hidden rounded-lg">
@@ -225,7 +204,10 @@ export default function ProjectsSection() {
                 <p className="text-sm text-gray-400 line-clamp-2 mb-3">{project.description}</p>
                 <div className="flex flex-wrap gap-1">
                   {project.tags.slice(0, 2).map((tag) => (
-                    <span key={tag} className="px-2 py-0.5 text-xs rounded-full bg-primary/10 border border-primary/20">
+                    <span
+                      key={tag}
+                      className="px-2 py-0.5 text-xs rounded-full bg-primary/10 border border-primary/20"
+                    >
                       {tag}
                     </span>
                   ))}
@@ -235,7 +217,7 @@ export default function ProjectsSection() {
                     </span>
                   )}
                 </div>
-              </motion.div>
+              </div>
             ))}
           </motion.div>
         </div>
