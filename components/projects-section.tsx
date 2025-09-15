@@ -2,7 +2,7 @@
 
 import { useRef, useState, useEffect } from "react"
 import { motion, useInView, useAnimation, type PanInfo } from "framer-motion"
-import { ExternalLink, Github, ChevronLeft, ChevronRight, Target } from "lucide-react"
+import { ExternalLink, Github, Target, ChevronLeft, ChevronRight } from "lucide-react"
 import Image from "next/image"
 
 const projects = [
@@ -74,10 +74,19 @@ export default function ProjectsSection() {
   const controls = useAnimation()
   const [activeIndex, setActiveIndex] = useState(0)
   const [isExpanded, setIsExpanded] = useState(false)
+  const [previewIndex, setPreviewIndex] = useState(0) // 新增 preview index
 
   useEffect(() => {
     controls.start("visible")
   }, [controls])
+
+  // 自動輪播 preview，每 5 秒切換
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setPreviewIndex((prev) => (prev + 3) % projects.length)
+    }, 5000)
+    return () => clearInterval(interval)
+  }, [])
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -163,13 +172,21 @@ export default function ProjectsSection() {
               ))}
             </ul>
 
-            <div className="flex flex-col sm:flex-row gap-4">
-              <motion.a href={projects[activeIndex].links.demo} className="flex items-center gap-2 px-4 py-2 rounded-lg glass bg-primary/10 hover:bg-primary/20" whileHover={{ scale: 1.05 }}>
-                <ExternalLink size={16} /> Live Demo
-              </motion.a>
-              <motion.a href={projects[activeIndex].links.github} className="flex items-center gap-2 px-4 py-2 rounded-lg glass hover:bg-card/50" whileHover={{ scale: 1.05 }}>
-                <Github size={16} /> Source Code
-              </motion.a>
+            <div className="flex gap-4">
+              <motion.button
+                onClick={prevProject}
+                className="p-2 rounded-full glass hover:bg-card/50"
+                whileHover={{ scale: 1.1 }}
+              >
+                <ChevronLeft />
+              </motion.button>
+              <motion.button
+                onClick={nextProject}
+                className="p-2 rounded-full glass hover:bg-card/50"
+                whileHover={{ scale: 1.1 }}
+              >
+                <ChevronRight />
+              </motion.button>
             </div>
           </div>
 
@@ -189,57 +206,49 @@ export default function ProjectsSection() {
           </motion.div>
         </motion.div>
 
-        {/* Navigation Arrows */}
-        <div className="flex justify-center gap-6 mt-8">
-          <button onClick={prevProject} className="p-3 rounded-full bg-card/50 hover:bg-card transition-colors">
-            <ChevronLeft size={20} className="text-white" />
-          </button>
-          <button onClick={nextProject} className="p-3 rounded-full bg-card/50 hover:bg-card transition-colors">
-            <ChevronRight size={20} className="text-white" />
-          </button>
-        </div>
-
-        {/* Preview Cards */}
+        {/* Preview Cards (輪播顯示) */}
         <motion.div
           className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6"
           initial="hidden"
           animate="visible"
           variants={containerVariants}
         >
-          {projects
-            .filter((_, idx) => idx !== activeIndex)
-            .slice(0, 3)
-            .map((project, idx) => (
-              <motion.div
-                key={idx}
-                className="glass p-5 rounded-xl hover:bg-card/30 transition-all cursor-pointer project-card"
-                variants={cardVariants}
-                whileHover={{ y: -5, scale: 1.02 }}
-                onClick={() => setActiveIndex(projects.findIndex((p) => p.title === project.title))}
-              >
-                <div className="h-40 mb-4 overflow-hidden rounded-lg">
-                  <Image
-                    src={project.image || "/placeholder.svg"}
-                    alt={project.title}
-                    width={400}
-                    height={300}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <h4 className="text-lg font-bold mb-2">{project.title}</h4>
-                <p className="text-sm text-gray-400 line-clamp-2 mb-3">{project.description}</p>
-                <div className="flex flex-wrap gap-1">
-                  {project.tags.slice(0, 2).map((tag) => (
-                    <span key={tag} className="px-2 py-0.5 text-xs rounded-full bg-primary/10 border border-primary/20">
-                      {tag}
-                    </span>
-                  ))}
-                  {project.tags.length > 2 && (
-                    <span className="px-2 py-0.5 text-xs rounded-full bg-gray-700">+{project.tags.length - 2}</span>
-                  )}
-                </div>
-              </motion.div>
-            ))}
+          {projects.slice(previewIndex, previewIndex + 3).map((project, idx) => (
+            <motion.div
+              key={idx}
+              className="glass p-5 rounded-xl hover:bg-card/30 transition-all cursor-pointer project-card"
+              variants={cardVariants}
+              whileHover={{ y: -5, scale: 1.02 }}
+              onClick={() => setActiveIndex(projects.findIndex((p) => p.title === project.title))}
+            >
+              <div className="h-40 mb-4 overflow-hidden rounded-lg">
+                <Image
+                  src={project.image || "/placeholder.svg"}
+                  alt={project.title}
+                  width={400}
+                  height={300}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <h4 className="text-lg font-bold mb-2">{project.title}</h4>
+              <p className="text-sm text-gray-400 line-clamp-2 mb-3">{project.description}</p>
+              <div className="flex flex-wrap gap-1">
+                {project.tags.slice(0, 2).map((tag) => (
+                  <span
+                    key={tag}
+                    className="px-2 py-0.5 text-xs rounded-full bg-primary/10 border border-primary/20"
+                  >
+                    {tag}
+                  </span>
+                ))}
+                {project.tags.length > 2 && (
+                  <span className="px-2 py-0.5 text-xs rounded-full bg-gray-700">
+                    +{project.tags.length - 2}
+                  </span>
+                )}
+              </div>
+            </motion.div>
+          ))}
         </motion.div>
       </div>
     </section>
