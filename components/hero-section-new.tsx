@@ -12,9 +12,10 @@ export default function HeroSectionNew() {
     offset: ["start start", "end start"],
   })
 
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0.3])
-  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.95])
-  const y = useTransform(scrollYProgress, [0, 0.5], [0, 100])
+  // 淡出時間點延後到 0.8
+  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0.3])
+  const scale = useTransform(scrollYProgress, [0, 0.8], [1, 0.95])
+  const y = useTransform(scrollYProgress, [0, 0.8], [0, 100])
 
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
 
@@ -59,13 +60,14 @@ export default function HeroSectionNew() {
       {/* Content */}
       <motion.div
         className="relative z-10 text-center text-white px-4"
+        style={{ opacity, scale, y }}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
       >
         <h1 className="text-5xl md:text-6xl font-bold mb-4">I'm Gaius</h1>
         <h2 className="text-xl md:text-2xl text-gray-300 mb-6">
-          Performance Marketing Specialist based in Canada
+          Performance Marketing Specialist based in Taiwan
         </h2>
         <a
           href="https://www.linkedin.com/in/gaiuschen"
