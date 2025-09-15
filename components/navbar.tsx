@@ -10,9 +10,9 @@ const navItems = [
   { name: "About", href: "#about" },
   { name: "Skills", href: "#skills" },
   { name: "Projects", href: "#projects" },
-  { name: "Blog", href: "#blogs" },
+  { name: "Blog", href: "#blogs" }, // 對應 LatestBlogsSection
   { name: "Experience", href: "#experience" },
-  { name: "Contact", href: "#contact" },
+  { name: "Contact", href: "#contact" }, // 確保 ContactSection 有 id="contact"
 ]
 
 export default function Navbar() {
@@ -30,13 +30,17 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? "py-3 glass" : "py-5 bg-transparent"}`}
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+        scrolled ? "py-3 glass" : "py-5 bg-transparent"
+      }`}
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
-        <Link href="#home" className="text-2xl font-heading font-bold text-gradient">
+        {/* Logo */}
+        <a href="#home" className="text-2xl font-heading font-bold text-gradient">
           Gaius C.
-        </Link>
+        </a>
 
+        {/* Desktop Nav */}
         <nav className="hidden md:flex items-center space-x-8">
           {navItems.map((item, index) => (
             <motion.div
@@ -45,7 +49,11 @@ export default function Navbar() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: index * 0.1 }}
             >
-              <Link href={item.href} className="text-sm font-medium relative group">
+              <Link
+                href={item.href}
+                scroll={false} // ⚡避免 Next.js 視為路由跳轉
+                className="text-sm font-medium relative group"
+              >
                 {item.name}
                 <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-gradient-to-r from-primary to-secondary group-hover:w-full transition-all duration-300"></span>
               </Link>
@@ -53,11 +61,13 @@ export default function Navbar() {
           ))}
         </nav>
 
+        {/* Mobile Menu Button */}
         <button className="md:hidden text-white" onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
+      {/* Mobile Nav */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -75,7 +85,12 @@ export default function Navbar() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.3, delay: index * 0.1 }}
                 >
-                  <Link href={item.href} className="block py-2 text-lg font-medium" onClick={() => setIsOpen(false)}>
+                  <Link
+                    href={item.href}
+                    scroll={false}
+                    className="block py-2 text-lg font-medium"
+                    onClick={() => setIsOpen(false)}
+                  >
                     {item.name}
                   </Link>
                 </motion.div>
