@@ -13,7 +13,7 @@ const projects = [
     longDescription:
       "At a leading Taiwanese financial enterprise, I spearheaded the shift from agency-managed to in-house ad operations across Meta, Google, and TikTok. Managed NT$2M+ monthly ad spend (~CAD $80K+) and delivered major efficiency gains: CPL ↓30%, CPF ↓50%, CPI ↓35%. These results built executive trust, enabling team expansion and faster scaling.",
     tags: ["Meta Ads", "Google Ads", "TikTok Ads", "AppsFlyer"],
-    image: "/images/projects/finance-campaign.jpg",
+    image: "/images/projects/finance-campaign.png",
     links: { demo: "#", github: "#" },
     features: ["CPL -30%", "CPF -50%", "CPI -35%", "In-house Transition"],
     color: "from-yellow-400/20 to-red-500/20",
@@ -25,7 +25,7 @@ const projects = [
     longDescription:
       "At a cross-border advertising agency, I managed regional campaigns in Taiwan, Vietnam, Japan, and Singapore. By launching localized e-commerce initiatives and leading D2C growth projects, the Taiwan branch achieved Top 3 Shopee APAC ranking. Contributed >12% margin growth for in-house brand initiatives through tailored ad strategies.",
     tags: ["Shopee", "E-commerce", "APAC Strategy", "D2C"],
-    image: "/images/projects/ecommerce-growth.jpg",
+    image: "/images/projects/ecommerce-growth.png",
     links: { demo: "#", github: "#" },
     features: ["Shopee Top-3 APAC", "Margin +12%", "Cross-border Ads", "Localized Strategies"],
     color: "from-orange-400/20 to-pink-500/20",
@@ -37,7 +37,7 @@ const projects = [
     longDescription:
       "At a mobile gaming startup, I ran campaigns across Google Ads, Meta Ads, TikTok Ads, AppLovin, and Reddit. Developed in-app event dashboards (IAP tracking) that improved attribution accuracy and actionable insights. Negotiated and executed Reddit Ads, pioneering platform adoption. Achieved 50% campaign cost reduction while maintaining conversion volume.",
     tags: ["Google Ads", "TikTok Ads", "Reddit Ads", "Attribution"],
-    image: "/images/projects/mobile-app.jpg",
+    image: "/images/projects/mobile-app.png",
     links: { demo: "#", github: "#" },
     features: ["50% Cost Reduction", "Reddit Ads Pilot", "IAP Event Dashboard", "Multi-channel"],
     color: "from-blue-500/20 to-cyan-500/20",
@@ -49,7 +49,7 @@ const projects = [
     longDescription:
       "As a fitness consultant at a global gym chain, I applied consultative sales and long-term engagement strategies. Increased membership sales by 80%, generating NT$500K+ annually. Sustained >90% retention rate by developing personalized coaching and relationship-building programs.",
     tags: ["Consultative Sales", "Client Retention", "B2C Growth"],
-    image: "/images/projects/fitness.jpg",
+    image: "/images/projects/fitness.png",
     links: { demo: "#", github: "#" },
     features: ["+80% Membership", "500K+ TWD Revenue", ">90% Retention", "Engagement Programs"],
     color: "from-green-400/20 to-emerald-500/20",
@@ -61,7 +61,7 @@ const projects = [
     longDescription:
       "Introduced Reddit Ads to a Taiwanese mobile app publisher, handling everything from vendor negotiation to execution. This pilot created a new channel for lead acquisition and app installs, later adopted by the wider marketing team as a scalable source of installs.",
     tags: ["Reddit Ads", "Innovation", "Vendor Negotiation"],
-    image: "/images/projects/reddit-ads.jpg",
+    image: "/images/projects/reddit-ads.png",
     links: { demo: "#", github: "#" },
     features: ["Vendor Negotiation", "Channel Innovation", "App Installs", "Market First"],
     color: "from-purple-500/20 to-pink-500/20",
