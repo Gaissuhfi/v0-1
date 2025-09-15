@@ -189,6 +189,16 @@ export default function ProjectsSection() {
           </motion.div>
         </motion.div>
 
+        {/* Navigation Arrows */}
+        <div className="flex justify-center gap-6 mt-8">
+          <button onClick={prevProject} className="p-3 rounded-full bg-card/50 hover:bg-card transition-colors">
+            <ChevronLeft size={20} className="text-white" />
+          </button>
+          <button onClick={nextProject} className="p-3 rounded-full bg-card/50 hover:bg-card transition-colors">
+            <ChevronRight size={20} className="text-white" />
+          </button>
+        </div>
+
         {/* Preview Cards */}
         <motion.div
           className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6"
@@ -231,18 +241,6 @@ export default function ProjectsSection() {
               </motion.div>
             ))}
         </motion.div>
-
-        {/* View All Projects Button */}
-        <div className="text-center mt-12">
-          <motion.a
-            href="/projects"
-            className="inline-block px-6 py-3 rounded-lg bg-gradient-to-r from-primary to-secondary text-white font-medium shadow-lg hover:shadow-xl transition-all"
-            whileHover={{ scale: 1.05, y: -2 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            View All Projects
-          </motion.a>
-        </div>
       </div>
     </section>
   )
