@@ -1,17 +1,16 @@
 "use client"
 
-import type React from "react"
-
 import { useState, useRef, useEffect } from "react"
 import { motion, useInView, useAnimation, useScroll, useTransform } from "framer-motion"
 import { Send, Bot, User, Sparkles, RefreshCw } from "lucide-react"
 import Image from "next/image"
 
-// Predefined chat messages
+// ---------- 固定文案（照你原本的） ----------
 const initialMessages = [
   {
     role: "assistant",
-    content: "👋 Hi there! I'm AI Bro, your virtual assistant. Ask me about Gaius's work experience, skills, or projects!",
+    content:
+      "👋 Hi there! I'm AI Bro, your virtual assistant. Ask me about Gaius's work experience, skills, or projects!",
   },
 ]
 
@@ -66,7 +65,6 @@ const projectResponses = [
   },
 ]
 
-// Extended services
 const aiMarketingResponses = [
   {
     role: "assistant",
@@ -127,7 +125,7 @@ These solutions help improve conversion while reducing workload.`,
   },
 ]
 
-// Rich text formatting
+// 富文字轉換
 const formatMessage = (content: string) => {
   let formatted = content.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
   formatted = formatted.replace(/^• (.+)$/gm, "<li>$1</li>")
@@ -141,6 +139,7 @@ export default function AIChatSection() {
   const [messages, setMessages] = useState(initialMessages)
   const [input, setInput] = useState("")
   const [isTyping, setIsTyping] = useState(false)
+
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const chatMessagesRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
@@ -149,30 +148,41 @@ export default function AIChatSection() {
   const isInView = useInView(ref, { once: false, amount: 0.1 })
   const controls = useAnimation()
 
-  // 加上 scrollYProgress
+  // 滾動進度 + 行動版偵測（用 matchMedia）
   const containerRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"],
   })
 
-  // 判斷是否為手機版
   const [isMobile, setIsMobile] = useState(false)
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 768)
-    handleResize()
-    window.addEventListener("resize", handleResize)
-    return () => window.removeEventListener("resize", handleResize)
+    const mq = window.matchMedia("(max-width: 767px)")
+    const handler = (e: MediaQueryListEvent | MediaQueryList) =>
+      setIsMobile("matches" in e ? e.matches : (e as MediaQueryList).matches)
+    handler(mq)
+    if (mq.addEventListener) mq.addEventListener("change", handler as (e: MediaQueryListEvent) => void)
+    else mq.addListener(handler as any)
+    return () => {
+      if (mq.removeEventListener) mq.removeEventListener("change", handler as (e: MediaQueryListEvent) => void)
+      else mq.removeListener(handler as any)
+    }
   }, [])
 
-  const opacity = isMobile ? 1 : useTransform(scrollYProgress, [0, 0.8], [1, 0.2])
-  const scale = isMobile ? 1 : useTransform(scrollYProgress, [0, 0.8], [1, 0.95])
-  const y = isMobile ? 0 : useTransform(scrollYProgress, [0, 0.8], [0, 50])
+  // ◎ 重點：兩種情況都給 MotionValue，避免型別切換
+  const opacityDesktop = useTransform(scrollYProgress, [0, 0.8], [1, 0.2])
+  const opacityMobile = useTransform(scrollYProgress, [0, 1], [1, 1]) // 手機版維持 1
+  const scaleDesktop = useTransform(scrollYProgress, [0, 0.8], [1, 0.95])
+  const scaleMobile = useTransform(scrollYProgress, [0, 1], [1, 1]) // 手機版維持 1
+  const yDesktop = useTransform(scrollYProgress, [0, 0.8], [0, 50])
+  const yMobile = useTransform(scrollYProgress, [0, 1], [0, 0]) // 手機版維持 0
+
+  const opacity = isMobile ? opacityMobile : opacityDesktop
+  const scale = isMobile ? scaleMobile : scaleDesktop
+  const y = isMobile ? yMobile : yDesktop
 
   useEffect(() => {
-    if (isInView) {
-      controls.start("visible")
-    }
+    if (isInView) controls.start("visible")
   }, [isInView, controls])
 
   useEffect(() => {
@@ -184,6 +194,7 @@ export default function AIChatSection() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (!input.trim()) return
+
     const userMessage = { role: "user", content: input }
     setMessages((prev) => [...prev, userMessage])
     setInput("")
@@ -194,15 +205,15 @@ export default function AIChatSection() {
     }, 100)
 
     setTimeout(() => {
+      const q = input.toLowerCase()
       let response
-      const lowercaseInput = input.toLowerCase()
-      if (lowercaseInput.includes("experience")) response = experienceResponses[0]
-      else if (lowercaseInput.includes("skill")) response = skillsResponses[0]
-      else if (lowercaseInput.includes("project")) response = projectResponses[0]
-      else if (lowercaseInput.includes("ai marketing")) response = aiMarketingResponses[0]
-      else if (lowercaseInput.includes("automation")) response = processAutomationResponses[0]
-      else if (lowercaseInput.includes("analytics")) response = dataAnalyticsResponses[0]
-      else if (lowercaseInput.includes("chatbot")) response = chatbotResponses[0]
+      if (q.includes("experience") || q.includes("work")) response = experienceResponses[0]
+      else if (q.includes("skill")) response = skillsResponses[0]
+      else if (q.includes("project")) response = projectResponses[0]
+      else if (q.includes("ai marketing")) response = aiMarketingResponses[0]
+      else if (q.includes("automation")) response = processAutomationResponses[0]
+      else if (q.includes("analytics")) response = dataAnalyticsResponses[0]
+      else if (q.includes("chatbot")) response = chatbotResponses[0]
       else
         response = {
           role: "assistant",
@@ -219,6 +230,7 @@ export default function AIChatSection() {
     const userMessage = { role: "user", content: question }
     setMessages((prev) => [...prev, userMessage])
     setIsTyping(true)
+
     setTimeout(() => {
       let response
       if (question.includes("experience")) response = experienceResponses[0]
@@ -231,6 +243,21 @@ export default function AIChatSection() {
 
   const resetChat = () => setMessages(initialMessages)
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { staggerChildren: 0.15, delayChildren: 0.1 } },
+  }
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: { y: 0, opacity: 1, transition: { duration: 0.6, ease: "easeOut" } },
+  }
+
+  const chatElementVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: { y: 0, opacity: 1, transition: { duration: 0.8, ease: "easeOut" } },
+  }
+
   return (
     <section
       id="experience"
@@ -242,22 +269,28 @@ export default function AIChatSection() {
           ref={ref}
           initial="hidden"
           animate={controls}
-          style={{ opacity, scale, y }}
+          variants={containerVariants}
           className="text-center mb-12"
+          style={{ opacity, scale, y }}
         >
-          <motion.h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">
+          <motion.h2 variants={itemVariants} className="text-3xl md:text-4xl font-heading font-bold mb-4">
             Chat with <span className="text-gradient">AI Bro</span>
           </motion.h2>
-          <motion.p className="text-gray-300 max-w-2xl mx-auto">
+          <motion.p variants={itemVariants} className="text-gray-300 max-w-2xl mx-auto">
             Ask about my work experience, skills, projects, or extended marketing services
           </motion.p>
-          <motion.div className="h-1 w-20 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto mt-4" />
+          <motion.div
+            variants={itemVariants}
+            className="h-1 w-20 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto mt-4"
+          />
         </motion.div>
 
-        {/* Chat box */}
         <div className="max-w-3xl mx-auto">
           <motion.div
             className="glass rounded-2xl overflow-hidden"
+            variants={chatElementVariants}
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
             style={{ opacity, scale, y }}
           >
             {/* Chat header */}
@@ -298,7 +331,10 @@ export default function AIChatSection() {
                       )}
                       <span className="text-xs font-medium">{message.role === "assistant" ? "AI Bro" : "You"}</span>
                     </div>
-                    <div className="text-sm rich-text" dangerouslySetInnerHTML={{ __html: formatMessage(message.content) }} />
+                    <div
+                      className="text-sm rich-text"
+                      dangerouslySetInnerHTML={{ __html: formatMessage(message.content) }}
+                    />
                   </div>
                 </motion.div>
               ))}
@@ -323,13 +359,25 @@ export default function AIChatSection() {
 
             {/* Quick questions */}
             <div className="p-3 border-t border-white/10 flex gap-2 overflow-x-auto">
-              <button type="button" onClick={() => handleQuickQuestion("Tell me about Gaius's work experience")} className="px-3 py-1 text-xs rounded-full bg-card/50 border border-white/10">
+              <button
+                type="button"
+                onClick={() => handleQuickQuestion("Tell me about Gaius's work experience")}
+                className="px-3 py-1 text-xs rounded-full bg-card/50 border border-white/10"
+              >
                 Work experience
               </button>
-              <button type="button" onClick={() => handleQuickQuestion("What are Gaius's skills?")} className="px-3 py-1 text-xs rounded-full bg-card/50 border border-white/10">
+              <button
+                type="button"
+                onClick={() => handleQuickQuestion("What are Gaius's skills?")}
+                className="px-3 py-1 text-xs rounded-full bg-card/50 border border-white/10"
+              >
                 Skills
               </button>
-              <button type="button" onClick={() => handleQuickQuestion("Tell me about Gaius's projects")} className="px-3 py-1 text-xs rounded-full bg-card/50 border border-white/10">
+              <button
+                type="button"
+                onClick={() => handleQuickQuestion("Tell me about Gaius's projects")}
+                className="px-3 py-1 text-xs rounded-full bg-card/50 border border-white/10"
+              >
                 Projects
               </button>
             </div>
@@ -346,7 +394,11 @@ export default function AIChatSection() {
                   className="flex-1 bg-card/50 rounded-full px-4 py-2 text-sm"
                   autoComplete="off"
                 />
-                <button type="submit" className="p-2 rounded-full bg-gradient-to-r from-primary to-secondary" disabled={!input.trim()}>
+                <button
+                  type="submit"
+                  className="p-2 rounded-full bg-gradient-to-r from-primary to-secondary"
+                  disabled={!input.trim()}
+                >
                   <Send size={18} className="text-white" />
                 </button>
               </form>
@@ -354,13 +406,16 @@ export default function AIChatSection() {
           </motion.div>
 
           {/* AI Assistant avatar */}
-          <motion.div
-            className="mt-8 flex justify-center"
-            style={{ opacity, scale, y }}
-          >
+          <motion.div className="mt-8 flex justify-center" style={{ opacity, scale, y }}>
             <div className="relative">
               <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-primary/30">
-                <Image src="/images/gaius-avatar.png" alt="Gaius Chen" width={96} height={96} className="w-full h-full object-cover" />
+                <Image
+                  src="/images/gaius-avatar.png"
+                  alt="Gaius Chen"
+                  width={96}
+                  height={96}
+                  className="w-full h-full object-cover"
+                />
               </div>
               <div className="absolute -bottom-2 -right-2 w-8 h-8 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center">
                 <Sparkles size={14} className="text-white" />
