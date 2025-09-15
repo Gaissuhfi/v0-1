@@ -83,7 +83,7 @@ export default function ProjectsSection() {
   // 自動輪播 preview，每 5 秒切換
   useEffect(() => {
     const interval = setInterval(() => {
-      setPreviewIndex((prev) => (prev + 3) % projects.length)
+      setPreviewIndex((prev) => (prev + 4) % projects.length)
     }, 5000)
     return () => clearInterval(interval)
   }, [])
