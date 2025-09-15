@@ -183,7 +183,7 @@ export default function ProjectsSection() {
           <motion.div
             className="flex gap-6"
             animate={{ x: ["0%", "-100%"] }}
-            transition={{ repeat: Infinity, duration: 40, ease: "linear" }}
+            transition={{ repeat: Infinity, duration: 15, ease: "linear" }}
           >
             {[...projects, ...projects].map((project, idx) => (
               <div
