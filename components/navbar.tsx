@@ -29,7 +29,7 @@ export default function Navbar() {
 
   return (
     <header
-      className={fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? "py-3 glass" : "py-5 bg-transparent"}}
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? "py-3 glass" : "py-5 bg-transparent"}`}
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
         <Link href="#home" className="text-2xl font-heading font-bold text-gradient">
