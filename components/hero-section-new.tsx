@@ -3,7 +3,6 @@
 import { useRef, useEffect, useState } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { ArrowDown } from "lucide-react"
-import Image from "next/image"
 
 export default function HeroSectionNew() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -12,7 +11,7 @@ export default function HeroSectionNew() {
     offset: ["start start", "end start"],
   })
 
-  // 偵測是否為手機版（寬度小於 768）
+  // 偵測是否為手機版
   const [isMobile, setIsMobile] = useState(false)
   useEffect(() => {
     const handleResize = () => {
@@ -23,26 +22,10 @@ export default function HeroSectionNew() {
     return () => window.removeEventListener("resize", handleResize)
   }, [])
 
-  // 桌機版正常淡出，手機版維持亮度
-  const opacity = isMobile
-    ? 1
-    : useTransform(scrollYProgress, [0, 0.8], [1, 0.3])
-  const scale = isMobile
-    ? 1
-    : useTransform(scrollYProgress, [0, 0.8], [1, 0.95])
-  const y = isMobile
-    ? 0
-    : useTransform(scrollYProgress, [0, 0.8], [0, 100])
-
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY })
-    }
-    window.addEventListener("mousemove", handleMouseMove)
-    return () => window.removeEventListener("mousemove", handleMouseMove)
-  }, [])
+  // 統一使用 useTransform，手機版的範圍給「不淡出」
+  const opacity = useTransform(scrollYProgress, isMobile ? [0, 1] : [0, 0.8], isMobile ? [1, 1] : [1, 0.3])
+  const scale   = useTransform(scrollYProgress, isMobile ? [0, 1] : [0, 0.8], isMobile ? [1, 1] : [1, 0.95])
+  const y       = useTransform(scrollYProgress, isMobile ? [0, 1] : [0, 0.8], isMobile ? [0, 0] : [0, 100])
 
   return (
     <section
@@ -50,7 +33,7 @@ export default function HeroSectionNew() {
       ref={containerRef}
       className="relative min-h-screen flex items-center justify-center overflow-hidden pb-20 bg-gradient-to-b from-[#0a0a0f] to-[#1a1a2e]"
     >
-      {/* Floating particles */}
+      {/* 背景粒子 */}
       <div className="absolute inset-0 z-0">
         {[...Array(6)].map((_, i) => (
           <motion.div
@@ -74,7 +57,7 @@ export default function HeroSectionNew() {
         ))}
       </div>
 
-      {/* Content */}
+      {/* 主要內容 */}
       <motion.div
         className="relative z-10 text-center text-white px-4"
         style={{ opacity, scale, y }}
