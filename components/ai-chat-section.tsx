@@ -3,7 +3,7 @@
 import type React from "react"
 
 import { useState, useRef, useEffect } from "react"
-import { motion, useInView, useAnimation } from "framer-motion"
+import { motion, useInView, useAnimation, useScroll, useTransform } from "framer-motion"
 import { Send, Bot, User, Sparkles, RefreshCw } from "lucide-react"
 import Image from "next/image"
 
@@ -127,7 +127,7 @@ These solutions help improve conversion while reducing workload.`,
   },
 ]
 
-// Rich text formatting function
+// Rich text formatting
 const formatMessage = (content: string) => {
   let formatted = content.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
   formatted = formatted.replace(/^• (.+)$/gm, "<li>$1</li>")
@@ -149,7 +149,25 @@ export default function AIChatSection() {
   const isInView = useInView(ref, { once: false, amount: 0.1 })
   const controls = useAnimation()
 
-  const chatContainerRef = useRef<HTMLDivElement>(null)
+  // 加上 scrollYProgress
+  const containerRef = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"],
+  })
+
+  // 判斷是否為手機版
+  const [isMobile, setIsMobile] = useState(false)
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768)
+    handleResize()
+    window.addEventListener("resize", handleResize)
+    return () => window.removeEventListener("resize", handleResize)
+  }, [])
+
+  const opacity = isMobile ? 1 : useTransform(scrollYProgress, [0, 0.8], [1, 0.2])
+  const scale = isMobile ? 1 : useTransform(scrollYProgress, [0, 0.8], [1, 0.95])
+  const y = isMobile ? 0 : useTransform(scrollYProgress, [0, 0.8], [0, 50])
 
   useEffect(() => {
     if (isInView) {
@@ -158,19 +176,14 @@ export default function AIChatSection() {
   }, [isInView, controls])
 
   useEffect(() => {
-    scrollToBottom()
-  }, [messages])
-
-  const scrollToBottom = () => {
     if (chatMessagesRef.current) {
       chatMessagesRef.current.scrollTop = chatMessagesRef.current.scrollHeight
     }
-  }
+  }, [messages])
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (!input.trim()) return
-
     const userMessage = { role: "user", content: input }
     setMessages((prev) => [...prev, userMessage])
     setInput("")
@@ -183,28 +196,19 @@ export default function AIChatSection() {
     setTimeout(() => {
       let response
       const lowercaseInput = input.toLowerCase()
-
-      if (lowercaseInput.includes("experience") || lowercaseInput.includes("work")) {
-        response = experienceResponses[0]
-      } else if (lowercaseInput.includes("skill")) {
-        response = skillsResponses[0]
-      } else if (lowercaseInput.includes("project")) {
-        response = projectResponses[0]
-      } else if (lowercaseInput.includes("ai marketing")) {
-        response = aiMarketingResponses[0]
-      } else if (lowercaseInput.includes("automation")) {
-        response = processAutomationResponses[0]
-      } else if (lowercaseInput.includes("analytics")) {
-        response = dataAnalyticsResponses[0]
-      } else if (lowercaseInput.includes("chatbot")) {
-        response = chatbotResponses[0]
-      } else {
+      if (lowercaseInput.includes("experience")) response = experienceResponses[0]
+      else if (lowercaseInput.includes("skill")) response = skillsResponses[0]
+      else if (lowercaseInput.includes("project")) response = projectResponses[0]
+      else if (lowercaseInput.includes("ai marketing")) response = aiMarketingResponses[0]
+      else if (lowercaseInput.includes("automation")) response = processAutomationResponses[0]
+      else if (lowercaseInput.includes("analytics")) response = dataAnalyticsResponses[0]
+      else if (lowercaseInput.includes("chatbot")) response = chatbotResponses[0]
+      else
         response = {
           role: "assistant",
           content:
             "I can tell you about Gaius's work experience, skills, projects, or extended services like AI Marketing, process automation, data analytics, and chatbot automation. What would you like to know?",
         }
-      }
 
       setMessages((prev) => [...prev, response])
       setIsTyping(false)
@@ -215,68 +219,46 @@ export default function AIChatSection() {
     const userMessage = { role: "user", content: question }
     setMessages((prev) => [...prev, userMessage])
     setIsTyping(true)
-
     setTimeout(() => {
       let response
-      if (question.includes("experience")) {
-        response = experienceResponses[0]
-      } else if (question.includes("skills")) {
-        response = skillsResponses[0]
-      } else if (question.includes("projects")) {
-        response = projectResponses[0]
-      }
+      if (question.includes("experience")) response = experienceResponses[0]
+      else if (question.includes("skills")) response = skillsResponses[0]
+      else if (question.includes("projects")) response = projectResponses[0]
       if (response) setMessages((prev) => [...prev, response])
       setIsTyping(false)
     }, 1500)
   }
 
-  const resetChat = () => {
-    setMessages(initialMessages)
-  }
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.15, delayChildren: 0.1 } },
-  }
-
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: { y: 0, opacity: 1, transition: { duration: 0.6, ease: "easeOut" } },
-  }
-
-  const chatElementVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: { y: 0, opacity: 1, transition: { duration: 0.8, ease: "easeOut" } },
-  }
+  const resetChat = () => setMessages(initialMessages)
 
   return (
-    <section id="experience" className="py-20 md:py-32 relative bg-gradient-to-b from-card/50 to-background">
+    <section
+      id="experience"
+      ref={containerRef}
+      className="py-20 md:py-32 relative bg-gradient-to-b from-card/50 to-background"
+    >
       <div className="container mx-auto px-4">
         <motion.div
           ref={ref}
           initial="hidden"
           animate={controls}
-          variants={containerVariants}
+          style={{ opacity, scale, y }}
           className="text-center mb-12"
         >
-          <motion.h2 variants={itemVariants} className="text-3xl md:text-4xl font-heading font-bold mb-4">
+          <motion.h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">
             Chat with <span className="text-gradient">AI Bro</span>
           </motion.h2>
-          <motion.p variants={itemVariants} className="text-gray-300 max-w-2xl mx-auto">
+          <motion.p className="text-gray-300 max-w-2xl mx-auto">
             Ask about my work experience, skills, projects, or extended marketing services
           </motion.p>
-          <motion.div
-            variants={itemVariants}
-            className="h-1 w-20 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto mt-4"
-          ></motion.div>
+          <motion.div className="h-1 w-20 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto mt-4" />
         </motion.div>
 
-        <div className="max-w-3xl mx-auto" ref={chatContainerRef}>
+        {/* Chat box */}
+        <div className="max-w-3xl mx-auto">
           <motion.div
-            className="glass rounded-2xl overflow-hidden chat-element"
-            variants={chatElementVariants}
-            initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
+            className="glass rounded-2xl overflow-hidden"
+            style={{ opacity, scale, y }}
           >
             {/* Chat header */}
             <div className="p-4 border-b border-white/10 flex items-center justify-between bg-card/50">
@@ -372,7 +354,10 @@ export default function AIChatSection() {
           </motion.div>
 
           {/* AI Assistant avatar */}
-          <motion.div className="mt-8 flex justify-center chat-element" initial={{ opacity: 0, scale: 0.8 }} animate={isInView ? { opacity: 1, scale: 1 } : {}}>
+          <motion.div
+            className="mt-8 flex justify-center"
+            style={{ opacity, scale, y }}
+          >
             <div className="relative">
               <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-primary/30">
                 <Image src="/images/gaius-avatar.png" alt="Gaius Chen" width={96} height={96} className="w-full h-full object-cover" />
