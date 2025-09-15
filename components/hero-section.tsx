@@ -11,21 +11,27 @@ export default function HeroSection() {
   const containerRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start start", "end start"],
+    offset: ["start start", "end start"], // 桌機版維持初始設定
   })
 
   const { isMobile } = useResponsive()
 
-  // 桌機版延到 0.8 才淡出，手機版保持不淡出
-  const opacity = isMobile
-    ? 1
-    : useTransform(scrollYProgress, [0, 0.8], [1, 0.2])
-  const scale = isMobile
-    ? 1
-    : useTransform(scrollYProgress, [0, 0.8], [1, 0.9])
-  const y = isMobile
-    ? 0
-    : useTransform(scrollYProgress, [0, 0.8], [0, 50])
+  // 桌機版淡出，手機維持不暗
+  const opacity = useTransform(
+    scrollYProgress,
+    isMobile ? [0, 1] : [0, 0.5],
+    isMobile ? [1, 1] : [1, 0.2]
+  )
+  const scale = useTransform(
+    scrollYProgress,
+    isMobile ? [0, 1] : [0, 0.5],
+    isMobile ? [1, 1] : [1, 0.9]
+  )
+  const y = useTransform(
+    scrollYProgress,
+    isMobile ? [0, 1] : [0, 0.5],
+    isMobile ? [0, 0] : [0, 50]
+  )
 
   const particlesRef = useRef<HTMLDivElement>(null)
 
