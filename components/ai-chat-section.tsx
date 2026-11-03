@@ -17,7 +17,7 @@ const initialMessages = [
 const experienceResponses = [
   {
     role: "assistant",
-    content: `Gaius has over 4 years of experience in performance marketing and digital advertising:
+    content: `Gaius has over 5 years of experience in performance marketing and digital advertising:
 
 **Senior Digital Marketing Specialist** — Chailease Holding (2024–Present)  
 • Lead in-house acquisition strategy for financing and installment products  
