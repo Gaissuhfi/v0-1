@@ -15,8 +15,8 @@ const contactItems = [
   {
     icon: <Phone className="w-6 h-6 text-cyan-400" />,
     title: "Phone",
-    value: "+886 903 024 283",
-    href: "tel:+886903024283",
+    value: "+886 903 024 xxx",
+    href: "tel:+886903024xxx",
     bg: "bg-cyan-900/30",
   },
   {
