@@ -116,7 +116,7 @@ export default function HeroSection() {
             <p className="text-blue-400">Performance Marketing Expert</p>
             <div className="mt-4 grid grid-cols-2 gap-4 text-sm text-gray-300">
               <div>
-                <span className="block text-2xl font-bold text-blue-400">4+</span>
+                <span className="block text-2xl font-bold text-blue-400">5+</span>
                 Years Exp
               </div>
               <div>
