@@ -86,7 +86,7 @@ export default function AboutSection() {
                     animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                     transition={{ duration: 0.5, delay: 0.5 }}
                   >
-                    I'm <span className="text-gradient">Gaius Chen</span>, a Performance Marketing Expert with 4+ years of
+                    I'm <span className="text-gradient">Gaius Chen</span>, a Performance Marketing Expert with 5+ years of
                     experience managing paid media campaigns across finance, e-commerce, and mobile apps.
                   </motion.p>
                 </div>
